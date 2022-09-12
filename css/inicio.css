@@ -10,38 +10,6 @@
     height: 100px;
 }
 
-.sub-bar{
-    background-color: var(--colorS2);
-    margin-top: 90px !important;
-    transition: 0.5s;
-    padding-left: 50px !important;
-    color: white;
-    vertical-align: middle !important;
-    padding-top: 10px;
-}
-
-.body{
-    transition: 0.5s;
-    padding-top: 25px;
-    padding-bottom: 25px;
-}
-
-.footer{
-    background-color: var(--colorP);
-    border-top: 4px solid var(--colorS);
-}
-
-.nav-footer {
-    flex-direction: row !important;
-    display:flex;
-    justify-content: center;
-    list-style: none;
-}
-
-.logo{
-    width: 90px;
-}
-
 .nav-link{
     margin-right: 10px;
     display: inline-block;
