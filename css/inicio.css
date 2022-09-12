@@ -7,10 +7,23 @@
 .header{
     background-color: var(--colorP);
     border-bottom: 4px solid var(--colorS);
+    height: 100px;
+}
+
+.sub-bar{
+    background-color: var(--colorS2);
+    margin-top: 90px !important;
+    transition: 0.5s;
+    padding-left: 50px !important;
+    color: white;
+    vertical-align: middle !important;
+    padding-top: 10px;
 }
 
 .body{
     transition: 0.5s;
+    padding-top: 25px;
+    padding-bottom: 25px;
 }
 
 .footer{
@@ -26,16 +39,31 @@
 }
 
 .logo{
-    width: 10vh;
+    width: 90px;
 }
 
 .nav-link{
-    padding: 3.5vh !important;
+    margin-right: 10px;
+    display: inline-block;
+    position: relative;
 }
 
-.nav-link:hover{
+.nav-link:after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 4px;
+    bottom: 0;
+    left: 0;
     background-color: white;
-    color: var(--colorS2)  !important;   
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.nav-link:hover:after{
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }
 
 
@@ -49,21 +77,20 @@
     background-color: #d9caf5;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 60px;
-    margin-top: 11vh !important;
+    margin-top: 100px !important;
   }
   
   .sidenav a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: black;
     display: block;
     transition: 0.3s;
   }
   
   .sidenav a:hover {
-    color: #f1f1f1;
+    color: #ffffff;
   }
   
   .sidenav .closebtn {
@@ -78,3 +105,18 @@
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
     }
+
+.card-game{
+    color: black;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.card-game:hover{
+    color: black;
+}
+
+.game-row{
+    margin-top: 50px;
+}
