@@ -10,9 +10,7 @@
 }
 
 .body{
-    margin-top: 12.5vh !important;
     transition: 0.5s;
-    padding: 5vh;
 }
 
 .footer{
@@ -25,15 +23,6 @@
     display:flex;
     justify-content: center;
     list-style: none;
-}
-
-.footer-link{
-    text-decoration: none;
-    font-size: 18px;
-}
-
-.footer-link:hover{
-    text-decoration: 2px underline white;
 }
 
 .logo{
