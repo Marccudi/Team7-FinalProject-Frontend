@@ -1,3 +1,6 @@
+*{
+    font-family: 'Montserrat';
+}
 
 /* Colores */
 
@@ -43,14 +46,44 @@
     width: 90px;
 }
 
-.sub-bar{
-    background-color: var(--colorS2);
-    margin-top: 90px !important;
-    transition: 0.5s;
-    padding-left: 50px !important;
+/* Body */
+
+body{
+    margin-top: 100px !important;
+}
+
+.body img{
+    border-radius: 10px;
+}
+
+.game-info > .row{
+    padding: 10px;
+}
+
+.title > h1{
+    font-size: 48px;
+    color: var(--colorS2);
+    font-family: 'Montserrat';
+    font-weight: bolder;
+}
+
+.game-info .btn{
+    background-color: var(--colorS);
     color: white;
-    vertical-align: middle !important;
-    padding-top: 10px;
+    border: 2px solid var(--colorS2);
+    margin-right: 10px;
+}
+
+
+.game-info .btn:hover{
+    background-color: var(--colorS2) !important;
+    border: 2px solid var(--colorS) !important;
+    color: white !important;
+}
+
+.game-info p {
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 /* Footer */
