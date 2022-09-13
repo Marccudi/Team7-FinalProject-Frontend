@@ -52,6 +52,10 @@ body{
     margin-top: 100px !important;
 }
 
+.body img{
+    border-radius: 10px;
+}
+
 .game-info > .row{
     padding: 10px;
 }
