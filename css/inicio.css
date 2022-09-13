@@ -1,0 +1,130 @@
+
+/* Colores */
+
+:root{
+    --colorP:#a37cec;
+    --colorS: #6b48ad;
+    --colorS2: #4a2d81;
+}
+
+/* Header */
+
+.header{
+    background-color: var(--colorP);
+    border-bottom: 4px solid var(--colorS);
+    height: 100px;
+}
+
+.nav-link{
+    margin-right: 10px;
+    display: inline-block;
+    position: relative;
+}
+
+.nav-link:after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 4px;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.nav-link:hover:after{
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.logo{
+    width: 90px;
+}
+
+.sub-bar{
+    background-color: var(--colorS2);
+    margin-top: 90px !important;
+    transition: 0.5s;
+    padding-left: 50px !important;
+    color: white;
+    vertical-align: middle !important;
+    padding-top: 10px;
+}
+
+/* Body */
+
+.body{
+    transition: 0.5s;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #d9caf5;
+    overflow-x: hidden;
+    transition: 0.5s;
+    margin-top: 100px !important;
+}
+  
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: black;
+    display: block;
+    transition: 0.3s;
+}
+  
+.sidenav a:hover {
+    color: #ffffff;
+}
+  
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+  
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+.card-game{
+    color: black;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.card-game:hover{
+    color: black;
+}
+
+.game-row{
+    margin-top: 50px;
+}
+
+/* Footer */
+
+.footer{
+    background-color: var(--colorP);
+    border-top: 4px solid var(--colorS);
+}
+
+.nav-footer {
+    flex-direction: row !important;
+    display:flex;
+    justify-content: center;
+    list-style: none;
+}
