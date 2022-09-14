@@ -1,0 +1,38 @@
+*{
+    font-family: 'Montserrat';
+}
+
+/* Colores */
+
+:root{
+    --colorP:#a37cec;
+    --colorS: #6b48ad;
+    --colorS2: #4a2d81;
+}
+
+body {
+    background-color: var(--colorP);
+}
+
+
+.forgot-psw {
+    background-color: white;
+    max-width: 600px;
+    padding: 100px;
+    border: 2px solid var(--colorS);
+}
+
+.btn{
+    background-color: var(--colorS);
+    color: white;
+    border: 2px solid var(--colorS2);
+    margin-right: 10px;
+}
+
+.logo{
+    width: 200px;
+}
+
+.row{
+    padding: 10px;
+}
