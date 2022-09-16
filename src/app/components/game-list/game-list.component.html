@@ -1,1 +1,121 @@
-<p>game-list works!</p>
+<div class="container-fluid sub-bar" id="sub-bar">
+  <div class="row">
+      <div class="col">
+          <span style="font-size:30px;cursor:pointer" onclick="openNav()"><i class="bi bi-gear-fill"></i></span>
+      </div>
+  </div>
+</div>
+<div id="body" class="body">
+
+  <!-- ############################## Side filter menu ############################## -->
+
+  <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <div class="accordion" id="accordionExample">
+          <div class="generos pt-2 accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                      Genero
+                  </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="genres-radio" id="flexRadioDefault1" checked>
+                          <label class="form-check-label" for="flexRadioDefault1">
+                              Todos
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="genres-radio" id="flexRadioDefault2">
+                          <label class="form-check-label" for="flexRadioDefault2">
+                              Accion
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="genres-radio" id="flexRadioDefault3">
+                          <label class="form-check-label" for="flexRadioDefault3">
+                              Shooter
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="genres-radio" id="flexRadioDefault4">
+                          <label class="form-check-label" for="flexRadioDefault4">
+                              Estrategia
+                          </label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="plataforma pt-2 accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      Plataforma
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="platforms-radio" id="flexRadioDefault1" checked>
+                          <label class="form-check-label" for="flexRadioDefault1">
+                              Todos
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="platforms-radio" id="flexRadioDefault2">
+                          <label class="form-check-label" for="flexRadioDefault2">
+                              Nintendo
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="platforms-radio" id="flexRadioDefault3">
+                          <label class="form-check-label" for="flexRadioDefault3">
+                              PS2
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="platforms-radio" id="flexRadioDefault4">
+                          <label class="form-check-label" for="flexRadioDefault4">
+                              Xbox one
+                          </label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="desarroladores pt-2 accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      Desarrolador
+                  </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="developers-radio" id="flexRadioDefault1" checked>
+                          <label class="form-check-label" for="flexRadioDefault1">
+                              Todos
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="developers-radio" id="flexRadioDefault2">
+                          <label class="form-check-label" for="flexRadioDefault2">
+                              Ubisoft
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="developers-radio" id="flexRadioDefault3">
+                          <label class="form-check-label" for="flexRadioDefault3">
+                              Electronic Arts
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="developers-radio" id="flexRadioDefault4">
+                          <label class="form-check-label" for="flexRadioDefault4">
+                              Blizzard
+                          </label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>

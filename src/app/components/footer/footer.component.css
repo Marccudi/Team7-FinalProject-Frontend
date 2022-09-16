@@ -1,0 +1,11 @@
+.footer{
+  background-color: var(--colorP);
+  border-top: 4px solid var(--colorS);
+}
+
+.nav-footer {
+  flex-direction: row !important;
+  display:flex;
+  justify-content: center;
+  list-style: none;
+}

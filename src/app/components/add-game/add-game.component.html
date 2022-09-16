@@ -1,1 +1,105 @@
-<p>add-game works!</p>
+<div id="body" class="body">
+
+  <!-- ############################## Game Form ############################## -->
+
+  <div class="game-form container">
+      <h1>Nuevo Juego</h1>
+      <form class="p-2">
+          <div class="row row-cols-1 row-cols-sm-2">
+              <div class="col mb-3 ">
+                <label for="nombreInput" class="form-label">Nombre: </label>
+                <input type="text" class="form-control" id="nombreInput">
+              </div>
+              <div class="col mb-3 ">
+                  <label for="platformSelect" class="form-label">Plataforma: </label>
+                  <select id="platformSelect" class="form-select">
+                    <option>Nintendo</option>
+                    <option>PS 2</option>
+                    <option>XBOX One</option>
+                    <option>PC</option>
+                  </select>
+              </div>
+          </div>
+          <div class="row row-cols-1 row-cols-sm-2">
+              <div class="mb-3 col">
+                  <label for="generoInput" class="form-label">Genero: </label>
+                  <div class="row">
+                      <div class="col">
+                          <input type="text" class="form-control" id="generoInput" disabled>
+                      </div>
+                  <div class="col">
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#generoModal">
+                          Seleccionar
+                      </button>
+                  </div>
+              </div>
+              </div>
+              <div class="mb-3 col">
+                  <label for="plataformaInput" class="form-label">Plataforma: </label>
+                  <div class="row">
+                      <div class="col">
+                          <input type="text" class="form-control" id="plataformaInput" disabled>
+                      </div>
+                      <div class="col">
+                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#desarrolladorModal">
+                              Seleccionar
+                          </button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row row-cols-1 row-cols-sm-2">
+              <div class="col mb-3 ">
+                <label for="nombreInput" class="form-label">Duración (minutos): </label>
+                <input type="number" class="form-control" id="nombreInput">
+              </div>
+              <div class="col mb-3 ">
+                  <label for="nombreInput" class="form-label">Año salida: </label>
+                  <input type="number" class="form-control" id="nombreInput">
+              </div>
+          </div>
+          <div class="row pt-2">
+              <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+      </form>
+
+      <!-- Modal generos -->
+      <div class="modal fade" id="generoModal" tabindex="-1" aria-labelledby="generoModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="generoModalLabel">Generos </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <!-- Modal desarrollador -->
+      <div class="modal fade" id="desarrolladorModal" tabindex="-1" aria-labelledby="desarrolladorModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="desarrolladorModalLabel">Desarrollador </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+      </div>
+
+  </div>
+</div>

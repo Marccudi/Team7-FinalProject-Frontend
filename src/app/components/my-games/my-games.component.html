@@ -1,1 +1,226 @@
-<p>my-games works!</p>
+<div class="container-fluid sub-bar" id="sub-bar">
+  <div class="row">
+      <div class="col">
+          <span style="font-size: 30px; cursor: pointer" onclick="openNav()"><i
+                  class="bi bi-gear-fill"></i></span>
+      </div>
+  </div>
+</div>
+
+<div id="body" class="body">
+  <!-- ############################## Side filter menu ############################## -->
+
+  <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <div class="accordion" id="accordionExample">
+          <div class="generos pt-2 accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                      Genero
+                  </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                  data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="genres-radio" id="flexRadioDefault1"
+                              checked />
+                          <label class="form-check-label" for="flexRadioDefault1">
+                              Todos
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="genres-radio"
+                              id="flexRadioDefault2" />
+                          <label class="form-check-label" for="flexRadioDefault2">
+                              Accion
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="genres-radio"
+                              id="flexRadioDefault3" />
+                          <label class="form-check-label" for="flexRadioDefault3">
+                              Shooter
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="genres-radio"
+                              id="flexRadioDefault4" />
+                          <label class="form-check-label" for="flexRadioDefault4">
+                              Estrategia
+                          </label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="plataforma pt-2 accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      Plataforma
+                  </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                  data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="platforms-radio"
+                              id="flexRadioDefault1" checked />
+                          <label class="form-check-label" for="flexRadioDefault1">
+                              Todos
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="platforms-radio"
+                              id="flexRadioDefault2" />
+                          <label class="form-check-label" for="flexRadioDefault2">
+                              Nintendo
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="platforms-radio"
+                              id="flexRadioDefault3" />
+                          <label class="form-check-label" for="flexRadioDefault3">
+                              PS2
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="platforms-radio"
+                              id="flexRadioDefault4" />
+                          <label class="form-check-label" for="flexRadioDefault4">
+                              Xbox one
+                          </label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="desarroladores pt-2 accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      Desarrolador
+                  </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                  data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="developers-radio"
+                              id="flexRadioDefault1" checked />
+                          <label class="form-check-label" for="flexRadioDefault1">
+                              Todos
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="developers-radio"
+                              id="flexRadioDefault2" />
+                          <label class="form-check-label" for="flexRadioDefault2">
+                              Ubisoft
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="developers-radio"
+                              id="flexRadioDefault3" />
+                          <label class="form-check-label" for="flexRadioDefault3">
+                              Electronic Arts
+                          </label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="developers-radio"
+                              id="flexRadioDefault4" />
+                          <label class="form-check-label" for="flexRadioDefault4">
+                              Blizzard
+                          </label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+        <!-- ############################################################ -->
+
+        <!-- ############################## Game List ############################## -->
+
+        <div class="my-games container">
+          <div class="row">
+              <div class="col ms-3">
+                  <h3>
+                      Mis juegos
+                      <a class="btn btn-outline-dark ms-3" href="addJuego.html">
+                          Añadir <i class="bi bi-plus"></i>
+                      </a>
+                  </h3>
+              </div>
+          </div>
+
+          <div class="row">
+              <div class="col">
+                  <div class="card mb-3 m-3">
+                      <div class="row g-0">
+                          <div class="col-md-4 text-center">
+                              <img src="../img/fifa13.webp" class="img-fluid" style="max-height: 200px" alt="..." />
+                          </div>
+                          <div class="col-md-7">
+                              <div class="card-body">
+                                  <h5 class="card-title">Fifa 13</h5>
+                                  <p class="card-text">Consola: PS5</p>
+                                  <p class="card-text">
+                                      Descripción: <br />Lorem ipsum dolor sit amet consectetur,
+                                      adipisicing elit. Architecto officia rerum magnam ut odio
+                                      hic, optio, eaque, ex consequatur est debitis! Aperiam
+                                      similique exercitationem consequatur repellat rem magnam
+                                      earum ut!
+                                  </p>
+                              </div>
+                          </div>
+                          <div class="col text-end p-3">
+                              <div class="row p-1">
+                                  <div class="col">
+                                      <a class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+                                  </div>
+                              </div>
+                              <div class="row p-1">
+                                  <div class="col">
+                                      <a class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card mb-3 m-3">
+                      <div class="row g-0">
+                          <div class="col-md-4 text-center">
+                              <img src="../img/fifa13.webp" class="img-fluid" style="max-height: 200px" alt="..." />
+                          </div>
+                          <div class="col-md-7">
+                              <div class="card-body">
+                                  <h5 class="card-title">Fifa 13</h5>
+                                  <p class="card-text">Consola: PS5</p>
+                                  <p class="card-text">
+                                      Descripción: <br />Lorem ipsum dolor sit amet consectetur,
+                                      adipisicing elit. Architecto officia rerum magnam ut odio
+                                      hic, optio, eaque, ex consequatur est debitis! Aperiam
+                                      similique exercitationem consequatur repellat rem magnam
+                                      earum ut!
+                                  </p>
+                              </div>
+                          </div>
+                          <div class="col text-end p-3">
+                              <div class="row p-1">
+                                  <div class="col">
+                                      <a class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+                                  </div>
+                              </div>
+                              <div class="row p-1">
+                                  <div class="col">
+                                      <a class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>

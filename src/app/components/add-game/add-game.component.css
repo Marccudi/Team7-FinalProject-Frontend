@@ -1,0 +1,16 @@
+.body{
+  margin-top: 100px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.game-form .btn{
+  background-color: var(--colorS);
+  border: 2px solid var(--colorS2);
+}
+
+.game-form .btn:hover{
+  background-color: var(--colorS2) !important;
+  border: 2px solid var(--colorS) !important;
+  color: white !important;
+}

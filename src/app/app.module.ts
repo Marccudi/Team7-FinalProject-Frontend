@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { GameListComponent } from './components/game-list/game-list.component';
 import { GameDetailComponent } from './components/game-detail/game-detail.component';
@@ -14,7 +14,6 @@ import { BorrowsListComponent } from './components/borrows-list/borrows-list.com
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { GameComponent } from './service/game/game.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +29,6 @@ import { GameComponent } from './service/game/game.component';
     LoginComponent,
     RegisterComponent,
     ForgotPasswordComponent,
-    GameComponent
   ],
   imports: [
     BrowserModule,
