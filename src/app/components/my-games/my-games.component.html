@@ -1,7 +1,7 @@
 <div class="container-fluid sub-bar" id="sub-bar">
   <div class="row">
       <div class="col">
-          <span style="font-size: 30px; cursor: pointer" onclick="openNav()"><i
+          <span style="font-size: 30px; cursor: pointer" (click)="openNav()"><i
                   class="bi bi-gear-fill"></i></span>
       </div>
   </div>
@@ -11,7 +11,7 @@
   <!-- ############################## Side filter menu ############################## -->
 
   <div id="mySidenav" class="sidenav">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
       <div class="accordion" id="accordionExample">
           <div class="generos pt-2 accordion-item">
               <h2 class="accordion-header" id="headingOne">
@@ -147,7 +147,7 @@
               <div class="col ms-3">
                   <h3>
                       Mis juegos
-                      <a class="btn btn-outline-dark ms-3" href="addJuego.html">
+                      <a class="btn btn-outline-dark ms-3" href routerLink="/juego-nuevo">
                           Añadir <i class="bi bi-plus"></i>
                       </a>
                   </h3>
