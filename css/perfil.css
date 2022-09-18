@@ -64,8 +64,17 @@
     margin-right: 10px;
 }
 
-.row{
-    padding: 10px;
+
+.btn-save {
+    width: 200px;
+}
+
+.row-input {
+    margin-bottom: 40px;
+}
+
+.container-perfil {
+    max-width: 1000px;
 }
 
 /* Footer */
@@ -81,3 +90,4 @@
     justify-content: center;
     list-style: none;
 }
+
