@@ -1,0 +1,33 @@
+.logo{
+    width: 90px;
+}
+
+.sub-bar{
+    background-color: var(--colorS2);
+    margin-top: 90px !important;
+    transition: 0.5s;
+    padding-left: 50px !important;
+    color: white;
+    vertical-align: middle !important;
+    padding-top: 10px;
+}
+
+.btn{
+    background-color: var(--colorS);
+    color: white;
+    border: 2px solid var(--colorS2);
+    margin-right: 10px;
+}
+
+
+.btn-save {
+    width: 200px;
+}
+
+.row-input {
+    margin-bottom: 40px;
+}
+
+.container-perfil {
+    max-width: 1000px;
+}
