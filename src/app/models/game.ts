@@ -1,6 +1,7 @@
 export class Game {
     id?: any;
     title?: any;
+    image?:any;
     duration?: any;
     yearReleased?: any;
     ageCalification?: any;

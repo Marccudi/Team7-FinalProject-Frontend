@@ -17,3 +17,7 @@
 .game-row{
   margin-top: 50px;
 }
+
+.card-img-top{
+  height: 400px !important;
+}

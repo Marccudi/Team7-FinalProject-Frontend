@@ -1,7 +1,6 @@
 <app-side-nav-bar></app-side-nav-bar>
 
 <div id="body" class="body">
-  <h1>AAAA</h1>
   <app-side-nav></app-side-nav>
   <!-- ############################## Game List ############################## -->
 
@@ -10,7 +9,7 @@
       <div class="col" *ngFor="let game of games">
         <a href routerLink="/juego" class="text-decoration-none">
           <div class="card card-game" style="width: 20rem">
-            <img src=# class="card-img-top img-fluid" alt="Fifa-13" />
+            <img src={{game.image}} class="card-img-top img-fluid" alt="{{game.title}}" />
             <div class="card-body">
               <h5 class="card-title">{{game.title}}</h5>
               <p class="card-text">{{game.platform.name}}</p>
