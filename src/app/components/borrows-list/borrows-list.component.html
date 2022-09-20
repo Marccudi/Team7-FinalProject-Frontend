@@ -1,19 +1,16 @@
-<div class="container-fluid sub-bar" id="sub-bar">
-  <div class="row">
-      <div class="col">
-          <span style="font-size:30px;cursor:pointer" (click)="openNav()"><i class="bi bi-gear-fill"></i></span>
-      </div>
-  </div>
-</div>
-
 <!-- ############################################################ -->
+<app-side-nav-bar></app-side-nav-bar>
+
+
+
 
 <!-- Pagina principal -->
 <!-- No deverian ser necesarios los br -->
 <div id="body" class="body">
+  <app-side-nav></app-side-nav>
   <!-- ############################## Side filter menu ############################## -->
 
-  <div id="mySidenav" class="sidenav">
+  <!-- <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
       <div class="accordion" id="accordionExample">
           <div class="generos pt-2 accordion-item">
@@ -49,7 +46,7 @@
               </div>
           </div>
       </div>
-  </div>
+  </div> -->
 
   <!-- ############################################################ -->
 
