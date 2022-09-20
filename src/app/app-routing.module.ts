@@ -18,7 +18,7 @@ const routes: Routes = [
   //, canActivate:[LoginActivateGuard]
   { path: 'mis-prestamos', component: BorrowsListComponent },
   { path: 'perfil', component: ProfileComponent },
-  { path: 'juego', component: GameDetailComponent },
+  { path: 'juego/:id', component: GameDetailComponent },
   { path: 'juego-nuevo', component: AddGameComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },

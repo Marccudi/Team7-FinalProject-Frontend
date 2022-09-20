@@ -1,9 +1,10 @@
-body{
-  margin-top: 100px !important;
+.body{
+  margin-top: 150px !important;
 }
 
 .body img{
   border-radius: 10px;
+  width: 400px !important;
 }
 
 .game-info > .row{

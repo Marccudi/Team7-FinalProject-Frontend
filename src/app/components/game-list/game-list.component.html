@@ -5,9 +5,9 @@
   <!-- ############################## Game List ############################## -->
 
   <div id="gameList" class="game-list container-fluid text-center w-100" *ngIf="games != null; else espera">
-    <div class="row row-cols-sm-1 row-cols-lg-3">
+    <div class="row"> <!-- row-cols-sm-1 row-cols-lg-4 row-cols-md-2 -->
       <div class="col" *ngFor="let game of games">
-        <a href routerLink="/juego" class="text-decoration-none">
+        <a href routerLink="/juego/{{game.id}}" class="text-decoration-none">
           <div class="card card-game" style="width: 20rem">
             <img src={{game.image}} class="card-img-top img-fluid" alt="{{game.title}}" />
             <div class="card-body">

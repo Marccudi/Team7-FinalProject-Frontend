@@ -1,56 +1,94 @@
 <div class="body p-5 container-fluid w-75">
-  <div class="row">
-      <div class="col">
-          <img src="../img/fifa13.webp" alt="fifa-13" class="img-fluid">
+  <div class="row row-cols-sm-1 row-cols-lg-2">
+      <div class="col mx-auto">
+          <img src={{currentGame.image}} alt={{currentGame.title}} class="img-fluid">
       </div>
       <div class="col game-info">
           <div class="row">
               <div class="col title">
-                  <h1>FIFA 13</h1>
+                  <h1>{{currentGame.title}}</h1>
               </div>
           </div>
           <div class="row">
               <div class="col">
-                  <h5>PLATAFORM</h5>
+                  <h5>Consola: {{currentGame.platform.name}}</h5>
               </div>
           </div>
           <div class="row">
               <div class="col">
-                  <h5>GENRE</h5>
+                  <h5>Generos: <span *ngFor="let genre of genres">{{genre.genre.name}} </span> </h5>
               </div>
           </div>
           <div class="row">
               <div class="col">
-                  <h5>DEVELOPER</h5>
+                  <h5>Desarrollador:{{currentGame.developer.name}}</h5>
               </div>
           </div>
           <div class="row">
               <div class="col">
-                  <h5>DURATION</h5>
+                  <h5>Duracion del juego: {{currentGame.duration}}</h5>
               </div>
           </div>
           <div class="row">
               <div class="col">
-                  <h5>YEAR RELEAS</h5>
+                  <h5>Año de salida: {{currentGame.yearReleased}}</h5>
               </div>
           </div>
           <div class="row">
               <div class="col">
-                  <h5>PEGI IMG</h5>
+                  <h5>Calificación de edad: {{currentGame.ageCalification}}</h5>
               </div>
           </div>
           <div class="row">
               <div class="col">
-                  <button class="btn btn-primary">Intercambio</button>
-                  <button class="btn btn-primary">Prestamo</button>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#intercambioModal">Intercambio</button>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#prestamoModal">Prestamo</button>
               </div>
           </div>
           <div class="row">
               <div class="col">
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita accusantium quod quasi officia laudantium adipisci totam voluptas, similique eius illo nihil, optio, corporis dolorem in.</p>
+                  <p>{{currentGame.description}}</p>
               </div>
           </div>
       </div>
   </div>
+
+<!-- Modal Intercambio -->
+<div class="modal fade" id="intercambioModal" tabindex="-1" aria-labelledby="intercambioModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="intercambioModalLabel">Intercambio </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Prestamo -->
+<div class="modal fade" id="prestamoModal" tabindex="-1" aria-labelledby="prestamoModalabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="prestamoModalLabel">Prestamo </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </div>

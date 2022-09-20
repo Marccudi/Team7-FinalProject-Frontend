@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-side-nav',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideNavComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route :ActivatedRoute ) { }
 
   ngOnInit(): void {
+    let url = this.route.snapshot.url.toString();
+    if (url=="inicio") {
+      console.log("Som al inicio");
+    }else if (url=="mis-juegos"){
+      console.log("Som a mis-juegos");
+    }else if (url=="mis-prestamos") {
+      console.log("Som a mis-prestamos");
+    }
+
   }
 
   closeNav() {
