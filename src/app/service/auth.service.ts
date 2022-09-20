@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const AUTH_API = "https://jmm-spring-api-h2-angular.herokuapp.com/";
+const AUTH_API = "https://re-playproject.herokuapp.com/";
 
 const httpOpt = {
   headers: new HttpHeaders({ 'Content-type' : 'application/json' })
@@ -30,7 +30,7 @@ export class AuthService {
 
   register(username:string, password:string):Observable<any>{
     this.logged=false;
-    return this.http.post(AUTH_API + 'users/', {
+    return this.http.post(AUTH_API + 'api/users', {
       username,password
     }, httpOpt);
   }
