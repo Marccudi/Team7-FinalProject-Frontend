@@ -10,6 +10,7 @@ import { UserService } from 'src/app/service/user.service';
 export class ProfileComponent implements OnInit {
 
   user?: User;
+  id: number = 11;
 
   constructor(private userService: UserService) { }
 
@@ -18,7 +19,20 @@ export class ProfileComponent implements OnInit {
   }
 
   getUser(): void {
+    this.userService.get(this.id).subscribe(
+      data => {
+        this.user = data;
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  updateUser(): void {
     
+    this.userService.update(this.id, this.user);
   }
 
 }

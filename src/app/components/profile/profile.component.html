@@ -9,10 +9,10 @@
     </div>
     <div class="row row-input">
         <div class="col-6">
-            <input class="w-100" id="user" type="text">
+            <input class="w-100" id="user" type="text" value="{{user?.username}}">
         </div>
         <div class="col-6">
-            <input class="w-100" id="email" type="email">
+            <input class="w-100" id="email" type="email" value="{{user?.email}}">
         </div>
     </div>
     <div class="row">
@@ -38,15 +38,15 @@
     </div>
     <div class="row row-input">
         <div class="col-6">
-            <input class="w-100" id="name" type="text">
+            <input class="w-100" id="name" type="text" value="{{user?.first_name}}">
         </div>
         <div class="col-6">
-            <input class="w-100" id="surname" type="text">
+            <input class="w-100" id="surname" type="text" value="{{user?.last_name}}">
         </div>
     </div>
     <div class="row">
         <div class="col-12">
-            <button class="btn btn-primary float-end btn-save">Guardar</button>
+            <button class="btn btn-primary float-end btn-save" (click)="updateUser()">Guardar</button>
         </div>
     </div>
 </div>
