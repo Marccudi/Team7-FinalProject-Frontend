@@ -9,10 +9,12 @@ import { AddGameComponent } from "./components/add-game/add-game.component";
 import { LoginComponent } from './components/login/login.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { RegisterComponent } from './components/register/register.component';
+//import { LoginActivateGuard } from './security/login-activate.guard';
 
 const routes: Routes = [
   { path: 'inicio', component: GameListComponent },
-  { path: 'mis-juegos', component: MyGamesComponent },
+  { path: 'mis-juegos', component: MyGamesComponent},
+  //, canActivate:[LoginActivateGuard]
   { path: 'mis-prestamos', component: BorrowsListComponent },
   { path: 'perfil', component: ProfileComponent },
   { path: 'juego', component: GameDetailComponent },
