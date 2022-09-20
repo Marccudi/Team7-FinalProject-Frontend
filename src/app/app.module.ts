@@ -14,6 +14,8 @@ import { BorrowsListComponent } from './components/borrows-list/borrows-list.com
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { SideNavBarComponent } from './components/side-nav-bar/side-nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     LoginComponent,
     RegisterComponent,
     ForgotPasswordComponent,
+    SideNavComponent,
+    SideNavBarComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,9 @@ import { BorrowsListComponent } from "./components/borrows-list/borrows-list.com
 import { ProfileComponent } from "./components/profile/profile.component";
 import { GameDetailComponent } from "./components/game-detail/game-detail.component";
 import { AddGameComponent } from "./components/add-game/add-game.component";
+import { LoginComponent } from './components/login/login.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   { path: 'inicio', component: GameListComponent },
@@ -14,6 +17,9 @@ const routes: Routes = [
   { path: 'perfil', component: ProfileComponent },
   { path: 'juego', component: GameDetailComponent },
   { path: 'juego-nuevo', component: AddGameComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'register', component: RegisterComponent },
   { path: '', redirectTo: 'inicio', pathMatch: 'full' }
 ];
 
@@ -22,3 +28,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
