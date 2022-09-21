@@ -15,15 +15,15 @@ export class LoginComponent implements OnInit {
     password:null
   }
 
-  user:any = {
-    id: 0,
-    username: '',
-    email: '',
-    password: '',
-    first_name: '',
-    last_name: '',
-    role: ''
-  };
+
+
+
+
+
+
+
+
+
 
   isLoggedIn = false
   isLoginFailed = false
@@ -55,18 +55,8 @@ export class LoginComponent implements OnInit {
     .subscribe(
       data => {
         this.tokenStorage.saveToken(data.token)
+        this.tokenStorage.saveUser(username);
 
-        this.userService.getUserbyName(username)
-        .subscribe(
-          data => {
-            this.user = data;
-            console.log(this.user);
-          },
-          error => {
-            console.log(error);
-          });
-
-        this.tokenStorage.saveUser(this.user);
         //console.log(this.tokenStorage.getToken());
         console.log('------------------------- ');
         console.log(this.tokenStorage.getUser());
