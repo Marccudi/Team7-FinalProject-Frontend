@@ -25,9 +25,17 @@ export class LoginComponent implements OnInit {
       this.isLoggedIn= true
       this.roles = this.tokenStorage.getUser().roles
     }
+
+    if (this.isLoggedIn) {
+      console.log(this.tokenStorage.getUser());
+      setTimeout(() => {
+        this.router.navigate(['inicio']);
+      }, 6000);
+    }
   }
 
   onSubmit():void{
+
     const { username, password } = this.form
     console.log('onsubmit');
 
@@ -41,8 +49,9 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false
         this.isLoggedIn = true
         this.roles = this.tokenStorage.getUser().role
-        //window.location.reload()
-        this.router.navigate(['inicio'])
+        window.location.reload()
+
+        //this.router.navigate(['inicio'])
 
       },
         err => {

@@ -33,6 +33,9 @@
             <div class="col-12 form-group">
                 <button class="btn btn-primary w-100">Iniciar sesión</button>
             </div>
+            <div class="alert alert-success" *ngIf="isLoggedIn">
+              Te has logueado correctamente
+            </div>
         </div>
       </form>
         <div class="row">
