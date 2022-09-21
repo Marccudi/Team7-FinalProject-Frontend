@@ -30,6 +30,7 @@ export class GameDetailComponent implements OnInit {
   genres: any;
   message = '';
   id = '';
+  imagePegi= '';
 
   constructor(private route :ActivatedRoute, private gameService: GameService, private router: Router, private gameHaveGenreService: GameHaveGenreService) { }
 
@@ -62,6 +63,20 @@ export class GameDetailComponent implements OnInit {
         error => {
           console.log(error);
       });
+  }
+
+  pegiImage(pegiTxt: string){
+    if (pegiTxt=='PEGI 3') {
+      return '../../../assets/pegi/PEGI_3.png';
+    } else if(pegiTxt=='PEGI 7'){
+      return '../../../assets/pegi/PEGI_7.png';
+    } else if(pegiTxt=='PEGI 12'){
+      return '../../../assets/pegi/PEGI_12.png';
+    } else if(pegiTxt=='PEGI 16'){
+      return '../../../assets/pegi/PEGI_16.png';
+    }else{
+      return '../../../assets/pegi/PEGI_18.png';
+    }
   }
 
 }

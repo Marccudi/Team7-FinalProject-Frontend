@@ -1,6 +1,6 @@
 <div class="body p-5 container-fluid w-75">
   <div class="row row-cols-sm-1 row-cols-lg-2">
-      <div class="col mx-auto">
+      <div class="col text-center portada">
           <img src={{currentGame.image}} alt={{currentGame.title}} class="img-fluid">
       </div>
       <div class="col game-info">
@@ -36,7 +36,7 @@
           </div>
           <div class="row">
               <div class="col">
-                  <h5>Calificación de edad: {{currentGame.ageCalification}}</h5>
+                  <img src={{pegiImage(currentGame.ageCalification)}} alt={{currentGame.title}} class="img-fluid pegi">
               </div>
           </div>
           <div class="row">
