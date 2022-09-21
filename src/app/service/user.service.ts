@@ -3,8 +3,7 @@ import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const baseUrl = "https://re-playproject-nosecurity.herokuapp.com/api/users"
-const baseUrlSec = "https://re-playproject.herokuapp.com/api/users"
+const baseUrl = "https://re-playproject.herokuapp.com/api/users"
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +37,7 @@ export class UserService {
   }
 
   getUserbyName(name :any){
-    return this.http.get(`${baseUrlSec}/username/${name}`);
+    return this.http.get(`${baseUrl}/username/${name}`);
   }
 
 }

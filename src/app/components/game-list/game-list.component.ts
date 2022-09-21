@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from "../../service/game.service";
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from 'src/app/service/user.service';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
 
 @Component({
@@ -14,21 +13,11 @@ export class GameListComponent implements OnInit {
   games:any;
   error:string = '';
 
-  user:any = {
-    id: 0,
-    username: '',
-    email: '',
-    password: '',
-    first_name: '',
-    last_name: '',
-    role: ''
-  };
-
-  constructor(private router: Router, private gameService: GameService, private route :ActivatedRoute, private userService :UserService, private tokenStorage: TokenStorageService) { }
+  constructor(private router: Router, private gameService: GameService, private route :ActivatedRoute, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     this.getAllGames();
-    this. getUsername();
+    console.log('ID: '+this.tokenStorage.getUser().id);
   }
 
   getAllGames(){
@@ -44,15 +33,15 @@ export class GameListComponent implements OnInit {
     );
   }
 
-  getUsername():void{
-    this.userService.getUserbyName(this.tokenStorage.getUser())
-    .subscribe(
-      data => {
-        this.user = data;
-        console.log(this.user);
-      },
-      error => {
-        console.log(error);
-      });
-  }
+
+
+
+
+
+
+
+
+
+
+
 }

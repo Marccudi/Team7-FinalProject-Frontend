@@ -1,5 +1,5 @@
-<div class="container text-center d-flex flex-column justify-content-center align-items-center min-vh-100 ">
-    <div class="container login-container ">
+<div class="body container-fluid text-center d-flex flex-column justify-content-center align-items-center min-vh-100 ">
+    <div class="container login-container shadow">
         <div class="row">
             <div class="col-12">
                 <img src="../../img/Re-play Logo black-blackground.png" alt="logo" class="img-fluid logo">
@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col-12 form-group">
                 <label for="password">contraseña:</label>
-                <input class="w-100 form-control" id="password" name="password" [(ngModel)]="form.password" required minlength="6" #password="ngModel">
+                <input type="password" class="w-100 form-control" id="password" name="password" [(ngModel)]="form.password" required minlength="6" #password="ngModel">
             </div>
         </div>
         <div class="row">

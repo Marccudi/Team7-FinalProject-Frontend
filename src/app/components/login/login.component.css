@@ -1,8 +1,13 @@
+.body{
+  background-color: var(--colorS2);
+}
+
 .login-container {
     background-color: white;
     max-width: 600px;
     padding: 100px;
-    border: 2px solid var(--colorS);
+    border: 2px solid var(--colorS2);
+    border-radius: 10px;
 }
 
 .btn{
@@ -10,6 +15,12 @@
     color: white;
     border: 2px solid var(--colorS2);
     margin-right: 10px;
+}
+
+.login-container .btn:hover{
+  background-color: var(--colorS2) !important;
+  border: 2px solid var(--colorS2) !important;
+  color: white !important;
 }
 
 .logo{
