@@ -11,5 +11,6 @@ export class Game {
     borrowed?: any;
     developer?: any;
     platform?: any;
+    owner?:any;
 }
 

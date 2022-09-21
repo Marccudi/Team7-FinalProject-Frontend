@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { GameService } from 'src/app/service/game.service';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
 
 @Component({
@@ -9,26 +10,31 @@ import { TokenStorageService } from 'src/app/service/token-storage.service';
 })
 export class MyGamesComponent implements OnInit {
 
-  constructor() { }
+  games:any;
+  error:string = '';
+
+  constructor(private router: Router, private gameService: GameService, private route :ActivatedRoute, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
-
+    this.getGamesFromUser();
   }
 
-  openNav() {
-    let mySidenav :HTMLElement = document.getElementById("mySidenav") !;
-    let body :HTMLElement = document.getElementById("body") !;
-    let subBar :HTMLElement = document.getElementById("sub-bar") !;
-    mySidenav.setAttribute( "style", "padding:10vh 2vh 2vh 2vh; width:250px;");
-    body.setAttribute( "style", "margin-left:300px;");
-    subBar.setAttribute( "style", "margin-left:250px;");
+  getGamesFromUser(){
+    this.gameService.getUserGames(this.tokenStorage.getUser().id+'')
+    .subscribe(
+      result => {
+        this.games = result;
+        console.log(result);
+      },
+      error => {
+        this.error = error;
+        console.log(error);
+      }
+    )
   }
-  closeNav() {
-    let mySidenav :HTMLElement = document.getElementById("mySidenav") !;
-    let body :HTMLElement = document.getElementById("body") !;
-    let subBar :HTMLElement = document.getElementById("sub-bar") !;
-    mySidenav.setAttribute( "style", "padding:0vh; width:0px;");
-    body.setAttribute( "style", "margin-left:0px;");
-    subBar.setAttribute( "style", "margin-left:0px;");
-  }
+
+  editar(idgame:string){}
+
+  borrar(idgame:string){}
+
 }

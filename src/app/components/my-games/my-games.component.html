@@ -15,66 +15,28 @@
               </div>
           </div>
 
-          <div class="row">
-              <div class="col">
+          <div class="row " *ngIf="games != null; else espera">
+              <div class="col" *ngFor="let game of games">
                   <div class="card mb-3 m-3">
-                      <div class="row g-0">
-                          <div class="col-md-4 text-center">
-                              <img src="https://imgs.search.brave.com/fMBMBXjLU81nrMlQSbpmC9yDBgiRNt5UZbMwOCPkSwQ/rs:fit:1140:1200:1/g:ce/aHR0cDovLzIuYnAu/YmxvZ3Nwb3QuY29t/Ly1uSDAydnNCd3BZ/RS9VTDRVRUh4MVdx/SS9BQUFBQUFBQUF6/TS9YVFcwTGRNQkdy/Yy9zMTYwMC9qYXF1/ZXR0ZS1maWZhLTEz/LXBjLWNvdmVyLWF2/YW50LWctMTM0ODU4/MDczOS5qcGc" class="img-fluid" style="max-height: 200px" alt="..." />
+                       <div class="row g-0">
+                          <div class="col-lg-3 col-12 text-center">
+                              <img src={{game.image}} class="img-fluid" style="max-height: 250px" alt={{game.title}} />
                           </div>
-                          <div class="col-md-7">
+                          <div class="col-lg-7 col-12">
                               <div class="card-body">
-                                  <h5 class="card-title">Fifa 13</h5>
-                                  <p class="card-text">Consola: PS5</p>
+                                  <h5 class="card-title">{{game.title}}</h5>
+                                  <p class="card-text"> <b>Consola:</b> {{game.platform.name}}</p>
                                   <p class="card-text">
-                                      Descripción: <br />Lorem ipsum dolor sit amet consectetur,
-                                      adipisicing elit. Architecto officia rerum magnam ut odio
-                                      hic, optio, eaque, ex consequatur est debitis! Aperiam
-                                      similique exercitationem consequatur repellat rem magnam
-                                      earum ut!
+                                     <b> Descripción:</b> {{game.description}}
                                   </p>
                               </div>
                           </div>
-                          <div class="col text-end p-3">
-                              <div class="row p-1">
-                                  <div class="col">
+                          <div class="col-lg-2 col-12 text-end p-3">
+                              <div class="row p-1 row-cols-lg-1 row-cols-sm-2">
+                                  <div class="col p-3">
                                       <a class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
                                   </div>
-                              </div>
-                              <div class="row p-1">
-                                  <div class="col">
-                                      <a class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="card mb-3 m-3">
-                      <div class="row g-0">
-                          <div class="col-md-4 text-center">
-                              <img src="https://imgs.search.brave.com/fMBMBXjLU81nrMlQSbpmC9yDBgiRNt5UZbMwOCPkSwQ/rs:fit:1140:1200:1/g:ce/aHR0cDovLzIuYnAu/YmxvZ3Nwb3QuY29t/Ly1uSDAydnNCd3BZ/RS9VTDRVRUh4MVdx/SS9BQUFBQUFBQUF6/TS9YVFcwTGRNQkdy/Yy9zMTYwMC9qYXF1/ZXR0ZS1maWZhLTEz/LXBjLWNvdmVyLWF2/YW50LWctMTM0ODU4/MDczOS5qcGc" class="img-fluid" style="max-height: 200px" alt="..." />
-                          </div>
-                          <div class="col-md-7">
-                              <div class="card-body">
-                                  <h5 class="card-title">Fifa 13</h5>
-                                  <p class="card-text">Consola: PS5</p>
-                                  <p class="card-text">
-                                      Descripción: <br />Lorem ipsum dolor sit amet consectetur,
-                                      adipisicing elit. Architecto officia rerum magnam ut odio
-                                      hic, optio, eaque, ex consequatur est debitis! Aperiam
-                                      similique exercitationem consequatur repellat rem magnam
-                                      earum ut!
-                                  </p>
-                              </div>
-                          </div>
-                          <div class="col text-end p-3">
-                              <div class="row p-1">
-                                  <div class="col">
-                                      <a class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
-                                  </div>
-                              </div>
-                              <div class="row p-1">
-                                  <div class="col">
+                                  <div class="col p-3">
                                       <a class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
                                   </div>
                               </div>
@@ -84,5 +46,6 @@
               </div>
           </div>
       </div>
+      <ng-template #espera>Esperando datos</ng-template>
   </div>
   <app-footer></app-footer>

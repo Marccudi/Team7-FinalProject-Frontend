@@ -25,13 +25,15 @@ export class GameDetailComponent implements OnInit {
     enabled: '',
     borrowed: '',
     developer: '',
-    platform: ''
+    platform: '',
+    owner:''
   };
 
   genres: any;
   message = '';
   id = '';
   imagePegi= '';
+  owns:any;
 
   constructor(private route :ActivatedRoute,private tokenStorage: TokenStorageService, private gameService: GameService, private router: Router, private gameHaveGenreService: GameHaveGenreService) { }
 
@@ -41,6 +43,7 @@ export class GameDetailComponent implements OnInit {
     this.getGame(this.id);
     this.getGenresXGame(this.id);
 
+
   }
 
   getGame(id: string):void{
@@ -49,6 +52,7 @@ export class GameDetailComponent implements OnInit {
       data => {
         this.currentGame = data;
         console.log(this.currentGame);
+        this.owns=this.owning();
       },
       error => {
         console.log(error);
@@ -78,6 +82,16 @@ export class GameDetailComponent implements OnInit {
       return '../../../assets/pegi/PEGI_16.png';
     }else{
       return '../../../assets/pegi/PEGI_18.png';
+    }
+  }
+
+  owning(){
+    if (this.tokenStorage.getUser().id==this.currentGame.owner.id) {
+      console.log(true)
+      return true;
+    }else{
+      console.log(false)
+      return false;
     }
   }
 
