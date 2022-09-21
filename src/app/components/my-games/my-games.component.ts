@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
 
 @Component({
   selector: 'app-my-games',
@@ -10,6 +12,7 @@ export class MyGamesComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
   openNav() {

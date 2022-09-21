@@ -18,6 +18,7 @@ export class GameListComponent implements OnInit {
   ngOnInit(): void {
     this.getAllGames();
     console.log('ID: '+this.tokenStorage.getUser().id);
+
   }
 
   getAllGames(){

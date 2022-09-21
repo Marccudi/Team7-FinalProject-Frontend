@@ -4,6 +4,7 @@ import { GameHaveGenreService } from '../../service/game-have-genre.service';
 import { Game } from '../../models/game';
 import { GameService } from '../../service/game.service';
 import { GameHaveGenre } from '../../models/game-have-genre';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
 
 @Component({
   selector: 'app-game-detail',
@@ -32,13 +33,14 @@ export class GameDetailComponent implements OnInit {
   id = '';
   imagePegi= '';
 
-  constructor(private route :ActivatedRoute, private gameService: GameService, private router: Router, private gameHaveGenreService: GameHaveGenreService) { }
+  constructor(private route :ActivatedRoute,private tokenStorage: TokenStorageService, private gameService: GameService, private router: Router, private gameHaveGenreService: GameHaveGenreService) { }
 
   ngOnInit(): void {
     this.message='';
     this.id = this.route.snapshot.params['id'];
     this.getGame(this.id);
     this.getGenresXGame(this.id);
+
   }
 
   getGame(id: string):void{
