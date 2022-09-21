@@ -24,8 +24,12 @@ export class UserService {
     return this.http.post(baseUrl, data);
   }
 
-  update(id: any, data: any): Observable<any> {
-    return this.http.put(`${baseUrl}/${id}`, data);
+  update(id: any, data: any) {
+    this.http.put(`${baseUrl}/${id}`, data).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
   }
 
   delete(id: any): Observable<any> {
