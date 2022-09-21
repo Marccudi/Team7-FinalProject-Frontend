@@ -1,12 +1,12 @@
 .body{
-  background-color: var(--colorS2);
+  background-color: var(--colorP);
 }
 
 .login-container {
     background-color: white;
     max-width: 600px;
     padding: 100px;
-    border: 2px solid var(--colorS2);
+    border: 2px solid var(--colorP);
     border-radius: 10px;
 }
 
@@ -24,7 +24,7 @@
 }
 
 .logo{
-    width: 50%;
+    width: 33%;
 }
 
 .row{

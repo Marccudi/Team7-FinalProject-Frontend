@@ -9,12 +9,9 @@ import { TokenStorageService } from 'src/app/service/token-storage.service';
 })
 export class AddGameComponent implements OnInit {
 
-  constructor(private tokenStorage: TokenStorageService, private router:Router) { }
+  constructor() { }
 
   ngOnInit(): void {
-    if (!this.tokenStorage.getToken()) {
-      this.router.navigate(['login']);
-    }
   }
 
 }
