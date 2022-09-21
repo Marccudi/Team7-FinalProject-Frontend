@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/service/user.service';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
 
 @Component({
   selector: 'app-profile',
@@ -8,13 +9,20 @@ import { UserService } from 'src/app/service/user.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  form:any = {
+    username:null,
+    password:null,
+    repeatPassword:null,
+    firstName:null,
+    lastName:null
+  }
+  user: any;
+  id: number = 0;
 
-  user?: User;
-  id: number = 11;
-
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
+    this.id = this.tokenStorageService.getUser().id;
     this.getUser();
   }
 
@@ -31,8 +39,14 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUser(): void {
-    this.user!.last_name = "test4";
-    this.userService.update(this.id, this.user);
+    if(this.form.password === this.form.repeatPassword) {
+      this.user.username = this.form.username;
+      this.user.password = this.form.password;
+      this.user.first_name = this.form.firstName;
+      this.user.last_name = this.form.lastName;
+      this.userService.update(this.id, this.user);
+    }
+    
   }
 
 }
