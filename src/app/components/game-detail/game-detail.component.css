@@ -2,9 +2,10 @@
   margin-top: 150px !important;
 }
 
-.body img{
+.portada > img{
   border-radius: 10px;
   width: 400px !important;
+  margin: auto !important;
 }
 
 .game-info > .row{
@@ -35,4 +36,8 @@
 .game-info p {
   text-align: justify;
   text-justify: inter-word;
+}
+
+.pegi{
+  width: 75px !important;
 }
