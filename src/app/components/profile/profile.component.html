@@ -15,10 +15,10 @@
     </div>
     <div class="row row-input">
         <div class="col-6">
-            <input class="w-100" id="user" type="text" value="{{user?.username}}">
+            <input class="w-100 form-control" id="user" type="text" value="{{user?.username}}" [(ngModel)]="form.username" required #username="ngModel">
         </div>
         <div class="col-6">
-            <input class="w-100" id="email" type="email" value="{{user?.email}}">
+            <input class="w-100 form-control-plaintext" id="email" type="email" value="{{user?.email}}" readonly>
         </div>
     </div>
     <div class="row">
@@ -31,10 +31,10 @@
     </div>
     <div class="row row-input">
         <div class="col-6">
-            <input class="w-100" id="password" type="password">
+            <input class="w-100 form-control" id="password" type="password" [(ngModel)]="form.password" #password="ngModel">
         </div>
         <div class="col-6">
-            <input class="w-100" id="repeat-password" type="password">
+            <input class="w-100 form-control" id="repeat-password" type="password" [(ngModel)]="form.repeatPassword" #repeatPassword="ngModel">
         </div>
     </div>
     <div class="row">
@@ -44,15 +44,15 @@
     </div>
     <div class="row row-input">
         <div class="col-6">
-            <input class="w-100" id="name" type="text" value="{{user?.first_name}}">
+            <input class="w-100 form-control" id="name" type="text" value="{{user?.first_name}}" [(ngModel)]="form.firstName" required #firstName="ngModel">
         </div>
         <div class="col-6">
-            <input class="w-100" id="surname" type="text" value="{{user?.last_name}}">
+            <input class="w-100 form-control" id="surname" type="text" value="{{user?.last_name}}" [(ngModel)]="form.lastName" required #lastName="ngModel">
         </div>
     </div>
     <div class="row">
         <div class="col-12">
-            <button class="btn btn-primary float-end btn-save" (click)="updateUser()">Guardar</button>
+            <button type="submit" class="btn btn-primary float-end btn-save" (click)="updateUser()">Guardar</button>
         </div>
     </div>
 </div>
