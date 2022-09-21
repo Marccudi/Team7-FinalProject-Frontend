@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  isLoggedIn = false
+  username?:string
 
-  ngOnInit(): void {
+  constructor (private tokenStorageService: TokenStorageService) { }
+
+  ngOnInit():void {
+    this.isLoggedIn=!!this.tokenStorageService.getToken()
+
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser()
+
+      this.username = user.username
+    }
   }
 
+  logout():void{
+    this.tokenStorageService.signOut()
+    window.location.reload();
+  }
 }

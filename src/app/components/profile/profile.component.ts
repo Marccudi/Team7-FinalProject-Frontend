@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUser(): void {
-    
+    this.user!.last_name = "test4";
     this.userService.update(this.id, this.user);
   }
 
