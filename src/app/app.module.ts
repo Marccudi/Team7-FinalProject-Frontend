@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule,  } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +18,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { SideNavBarComponent } from './components/side-nav-bar/side-nav-bar.component';
+
+import { AuthInterceptorProviders } from './_helpers/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,7 @@ import { SideNavBarComponent } from './components/side-nav-bar/side-nav-bar.comp
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [AuthInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
