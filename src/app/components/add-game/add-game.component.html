@@ -1,32 +1,29 @@
 <app-header></app-header>
-<div id="body" class="body">
+<div id="body " class="body">
 
   <!-- ############################## Game Form ############################## -->
 
-  <div class="game-form container">
+  <div class="game-form container p-5">
       <h1>Nuevo Juego</h1>
       <form class="p-2">
-          <div class="row row-cols-1 row-cols-sm-2">
+          <div class="row row-cols-1 row-cols-lg-2 row-cols-sm-1">
               <div class="col mb-3 ">
                 <label for="nombreInput" class="form-label">Nombre: </label>
-                <input type="text" class="form-control" id="nombreInput">
+                <input type="text" class="form-control" id="nombreInput" required [(ngModel)]="game.title" name="title">
               </div>
               <div class="col mb-3 ">
                   <label for="platformSelect" class="form-label">Plataforma: </label>
-                  <select id="platformSelect" class="form-select">
-                    <option>Nintendo</option>
-                    <option>PS 2</option>
-                    <option>XBOX One</option>
-                    <option>PC</option>
+                  <select id="platformSelect" class="form-select" required [(ngModel)]="game.platform" name="platform">
+                    <option *ngFor="let platform of platforms" value="{{platform}}">{{platform.name}}</option>
                   </select>
               </div>
           </div>
-          <div class="row row-cols-1 row-cols-sm-2">
+          <div class="row row-cols-1 row-cols-lg-3 row-cols-sm-1">
               <div class="mb-3 col">
-                  <label for="generoInput" class="form-label">Genero: </label>
+                  <label for="generoInput" class="form-label">Género: </label>
                   <div class="row">
                       <div class="col">
-                          <input type="text" class="form-control" id="generoInput" disabled>
+                          <input type="text" class="form-control" id="generoInput" readonly required [(ngModel)]="generos" name="genre">
                       </div>
                   <div class="col">
                       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#generoModal">
@@ -36,10 +33,10 @@
               </div>
               </div>
               <div class="mb-3 col">
-                  <label for="plataformaInput" class="form-label">Plataforma: </label>
+                  <label for="developerInput" class="form-label">Desarollador: </label>
                   <div class="row">
                       <div class="col">
-                          <input type="text" class="form-control" id="plataformaInput" disabled>
+                          <input type="text" class="form-control" id="developerInput" value="a" required [(ngModel)]="game.developer" readonly name="developer">
                       </div>
                       <div class="col">
                           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#desarrolladorModal">
@@ -48,24 +45,44 @@
                       </div>
                   </div>
               </div>
+              <div class="mb-3 col">
+                <label for="pegiSelect" class="form-label">PEGI: </label>
+                <select class="form-select" aria-label="pegi-select" id="pegiSelect" required [(ngModel)]="game.ageCalification" name="ageCalification">
+                  <option value="PEGI 3">PEGI 3</option>
+                  <option value="PEGI 7">PEGI 7</option>
+                  <option value="PEGI 12">PEGI 12</option>
+                  <option value="PEGI 16">PEGI 16</option>
+                  <option value="PEGI 18">PEGI 18</option>
+                </select>
+            </div>
           </div>
-          <div class="row row-cols-1 row-cols-sm-2">
+          <div class="row row-cols-1 row-cols-lg-3 row-cols-sm-1">
               <div class="col mb-3 ">
-                <label for="nombreInput" class="form-label">Duración (minutos): </label>
-                <input type="number" class="form-control" id="nombreInput">
+                <label for="duracionInput" class="form-label">Duración (minutos): </label>
+                <input type="number" class="form-control" id="duracionInput" required [(ngModel)]="game.duration" name="duration">
               </div>
               <div class="col mb-3 ">
-                  <label for="nombreInput" class="form-label">Año salida: </label>
-                  <input type="number" class="form-control" id="nombreInput">
+                  <label for="salidaInput" class="form-label">Año salida: </label>
+                  <input type="number" class="form-control" id="salidaInput" required [(ngModel)]="game.yearReleased" name="yearReleased">
               </div>
+              <div class="col mb-3 ">
+                <label for="imagenInput" class="form-label">Imagen (URL): </label>
+                <input type="text" class="form-control" id="imagenInput" required [(ngModel)]="game.image" name="image">
+            </div>
           </div>
+          <div class="row row-cols-1">
+            <div class="col mb-3 ">
+              <label for="descripcionInput" class="form-label">Descripción: </label>
+              <textarea class="form-control" placeholder="Inserta la descripción del juego" style="height: 200px" id="descripcionInput" required [(ngModel)]="game.description" name="description"></textarea>
+            </div>
+        </div>
           <div class="row pt-2">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button (click)="saveGame()" type="submit" class="btn btn-primary">Submit</button>
           </div>
       </form>
 
       <!-- Modal generos -->
-      <div class="modal fade" id="generoModal" tabindex="-1" aria-labelledby="generoModalLabel" aria-hidden="true">
+      <div class="modal fade modal-lg" id="generoModal" tabindex="-1" aria-labelledby="generoModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
               <div class="modal-header">
@@ -84,7 +101,7 @@
       </div>
 
       <!-- Modal desarrollador -->
-      <div class="modal fade" id="desarrolladorModal" tabindex="-1" aria-labelledby="desarrolladorModalLabel" aria-hidden="true">
+      <div class="modal fade modal-lg" id="desarrolladorModal" tabindex="-1" aria-labelledby="desarrolladorModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
               <div class="modal-header">
@@ -92,7 +109,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                ...
+                <div class="input" *ngFor="let developer of developers">
+                  <input class="me-2" type="radio" value="{{developer}}" name="developer" (change)="radioChangeHandler($event)">
+                  <label>{{developer.name}}</label>
+                </div>
+
+                <p>AAA: {{platformModel.name}}</p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
