@@ -1,9 +1,13 @@
+.body{
+    background-color: var(--colorP);
+  }
 
-.forgot-psw {
+.container-register {
     background-color: white;
     max-width: 900px;
     padding: 100px;
     border: 2px solid var(--colorS);
+    border-radius: 10px;
 }
 
 .btn{
@@ -13,8 +17,14 @@
     margin-right: 10px;
 }
 
+.btn:hover {
+    background-color: var(--colorS2) !important;
+  border: 2px solid var(--colorS2) !important;
+  color: white !important;
+}
+
 .logo{
-    width: 100%;
+    width: 50%;
 }
 
 .row{
