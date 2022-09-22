@@ -36,4 +36,8 @@ export class GameService {
     console.log(data);
     return this.http.post(baseURL, data);
   }
+
+  delete(idGame: any, idUser: any): Observable<any> {
+    return this.http.delete(baseURL+'/'+idGame+'/'+idUser);
+  }
 }
