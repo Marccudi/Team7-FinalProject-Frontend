@@ -14,7 +14,7 @@
               <div class="col mb-3 ">
                   <label for="platformSelect" class="form-label">Plataforma: </label>
                   <select id="platformSelect" class="form-select" required [(ngModel)]="game.platform" name="platform">
-                    <option *ngFor="let platform of platforms" value="{{platform}}">{{platform.name}}</option>
+                    <option *ngFor="let platform of platforms" value="{{platform.id}}">{{platform.name}}</option>
                   </select>
               </div>
           </div>
@@ -23,7 +23,7 @@
                   <label for="generoInput" class="form-label">Género: </label>
                   <div class="row">
                       <div class="col">
-                          <input type="text" class="form-control" id="generoInput" readonly required [(ngModel)]="generos" name="genre">
+                          <input type="text" class="form-control" id="generoInput" readonly required [(ngModel)]="generosString" name="genre">
                       </div>
                   <div class="col">
                       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#generoModal">
@@ -36,7 +36,7 @@
                   <label for="developerInput" class="form-label">Desarollador: </label>
                   <div class="row">
                       <div class="col">
-                          <input type="text" class="form-control" id="developerInput" value="a" required [(ngModel)]="game.developer" readonly name="developer">
+                          <input type="text" class="form-control" id="developerInput" value="a" required [(ngModel)]="developerModel.name" readonly name="developer">
                       </div>
                       <div class="col">
                           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#desarrolladorModal">
@@ -72,8 +72,8 @@
           </div>
           <div class="row row-cols-1">
             <div class="col mb-3 ">
-              <label for="descripcionInput" class="form-label">Descripción: </label>
-              <textarea class="form-control" placeholder="Inserta la descripción del juego" style="height: 200px" id="descripcionInput" required [(ngModel)]="game.description" name="description"></textarea>
+              <label for="descripcionInput" class="form-label">Descripción: (254 carcateres maximo)</label>
+              <textarea class="form-control" placeholder="Inserta la descripción del juego" maxlength="254" style="height: 200px" id="descripcionInput" required [(ngModel)]="game.description" name="description"></textarea>
             </div>
         </div>
           <div class="row pt-2">
@@ -89,13 +89,20 @@
                 <h5 class="modal-title" id="generoModalLabel">Generos </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <div class="modal-body">
-                ...
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-              </div>
+              <form (ngSubmit)="onSubmit()" #form="ngForm">
+                <div class="modal-body">
+                    <div class="input" *ngFor="let genre of genres">
+                      <input class="me-2" type="checkbox"
+                      name="genre"
+                      (change)="OnChangeGenre(genre.id, $event.target)">
+                      <label>{{genre.name}}</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Save</button>
+                </div>
+              </form>
             </div>
           </div>
       </div>
@@ -109,16 +116,16 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <div class="input" *ngFor="let developer of developers">
-                  <input class="me-2" type="radio" value="{{developer}}" name="developer" (change)="radioChangeHandler($event)">
-                  <label>{{developer.name}}</label>
-                </div>
-
-                <p>AAA: {{platformModel.name}}</p>
+                  <div class="input" *ngFor="let developer of developers">
+                    <input class="me-2" type="radio"
+                    name="developer"
+                    value="{{developer.id}}"
+                    (change)="OnChangePlatform($event)">
+                    <label>{{developer.name}}</label>
+                  </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
               </div>
             </div>
           </div>

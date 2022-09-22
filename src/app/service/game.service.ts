@@ -31,6 +31,9 @@ export class GameService {
   }
 
   create(data:any):Observable<any>{
+    console.log("URL"+baseURL);
+    console.log('DATA:');
+    console.log(data);
     return this.http.post(baseURL, data);
   }
 }
