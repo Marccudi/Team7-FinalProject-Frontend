@@ -11,7 +11,7 @@ import { TokenStorageService } from 'src/app/service/token-storage.service';
 })
 export class BorrowsListComponent implements OnInit {
 
-  games:any;
+  borrowedGames:any;
   error:string='';
   constructor(private router: Router, private gameService: GameService, private route :ActivatedRoute, private tokenStorage: TokenStorageService, private borrowServ:BorrowsService) { }
 
@@ -23,14 +23,20 @@ export class BorrowsListComponent implements OnInit {
     this.borrowServ.getBorrowedGamesByOwner(this.tokenStorage.getUser().id+'')
     .subscribe(
       result => {
-        this.games = result;
+        this.borrowedGames = result;
         console.log('games:'+JSON.stringify(result));
+
       },
       error => {
         this.error = error;
         console.log('error'+error);
       }
     )
+  }
+
+  transformDate(date:any){
+
+    return Date.UTC(date.getDate(), date.getMonth(), date.getFullYear())
   }
 
 }
