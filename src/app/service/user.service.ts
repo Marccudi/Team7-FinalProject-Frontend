@@ -25,7 +25,7 @@ export class UserService {
   }
 
   update(id: any, data: any) {
-    this.http.put(`${baseUrl}/${id}`, data).subscribe(
+    return this.http.put(`${baseUrl}/${id}`, data).subscribe(
       data => {
         console.log(data);
       }
