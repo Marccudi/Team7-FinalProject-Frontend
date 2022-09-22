@@ -127,47 +127,29 @@
               </div>
           </div>
       </div>
-      <div class="row">
-          <div class="col">
+      <div class="row" *ngIf="games != null; else espera">
+          <div class="col" *ngFor="let game of games">
               <div class="card mb-3 m-3">
                   <div class="row g-0">
                       <div class="col-md-4 text-center">
-                          <img src="https://imgs.search.brave.com/fMBMBXjLU81nrMlQSbpmC9yDBgiRNt5UZbMwOCPkSwQ/rs:fit:1140:1200:1/g:ce/aHR0cDovLzIuYnAu/YmxvZ3Nwb3QuY29t/Ly1uSDAydnNCd3BZ/RS9VTDRVRUh4MVdx/SS9BQUFBQUFBQUF6/TS9YVFcwTGRNQkdy/Yy9zMTYwMC9qYXF1/ZXR0ZS1maWZhLTEz/LXBjLWNvdmVyLWF2/YW50LWctMTM0ODU4/MDczOS5qcGc" class="img-fluid rounded" style="max-height: 200px;"
-                              alt="...">
+                          <img src={{game.game.image}} class="img-fluid rounded" style="max-height: 200px;" alt={{game.game.title}}>
                       </div>
                       <div class="col-md-8">
                           <div class="card-body">
-                              <h5 class="card-title">Fifa 13</h5>
-                              <p class="card-text">Consola: PS5</p>
+                              <h5 class="card-title">{{game.game.title}}</h5>
+                              <p class="card-text">Consola: {{game.game.platform.name}}</p>
                               <hr>
                               <p class="card-text"><small class="text-muted pe-5">fecha inicio prestamo:
-                                      13/09/2022</small> <small class="text-muted ps-5">fecha final del prestamo:
-                                      13/10/2022</small></p>
+                                {{game.lend_date}}</small> <small class="text-muted ps-5">fecha final del prestamo:
+                                  {{game.return_date}}</small></p>
                           </div>
                       </div>
                   </div>
               </div>
-              <div class="card mb-3 m-3">
-                  <div class="row g-0">
-                      <div class="col-md-4 text-center">
-                          <img src="https://imgs.search.brave.com/fMBMBXjLU81nrMlQSbpmC9yDBgiRNt5UZbMwOCPkSwQ/rs:fit:1140:1200:1/g:ce/aHR0cDovLzIuYnAu/YmxvZ3Nwb3QuY29t/Ly1uSDAydnNCd3BZ/RS9VTDRVRUh4MVdx/SS9BQUFBQUFBQUF6/TS9YVFcwTGRNQkdy/Yy9zMTYwMC9qYXF1/ZXR0ZS1maWZhLTEz/LXBjLWNvdmVyLWF2/YW50LWctMTM0ODU4/MDczOS5qcGc" class="img-fluid rounded" style="max-height: 200px;"
-                              alt="...">
-                      </div>
-                      <div class="col-md-8">
-                          <div class="card-body">
-                              <h5 class="card-title">Fifa 13</h5>
-                              <p class="card-text">Consola: PS5</p>
-                              <hr>
-                              <p class="card-text"><small class="text-muted pe-5">fecha inicio prestamo:
-                                      13/09/2022</small> <small class="text-muted ps-5">fecha final del prestamo:
-                                      13/10/2022</small></p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+
           </div>
       </div>
   </div>
-
+  <ng-template #espera>Esperando datos</ng-template>
 </div>
 <app-footer></app-footer>
