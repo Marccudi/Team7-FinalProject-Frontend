@@ -29,4 +29,8 @@ export class GameService {
     console.log(url);
     return this.http.get<Game[]>(url);
   }
+
+  create(data:any):Observable<any>{
+    return this.http.post(baseURL, data);
+  }
 }
