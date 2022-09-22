@@ -9,15 +9,17 @@ import { TokenStorageService } from 'src/app/service/token-storage.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  form:any = {
-    username:null,
-    password:null,
-    repeatPassword:null,
-    firstName:null,
-    lastName:null
+  form: any = {
+    username: null,
+    password: null,
+    repeatPassword: null,
+    firstName: null,
+    lastName: null
   }
   user: any;
   id: number = 0;
+  updatedUser = false;
+  errorPassword = false;
 
   constructor(private userService: UserService, private tokenStorageService: TokenStorageService) { }
 
@@ -39,14 +41,21 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUser(): void {
-    if(this.form.password === this.form.repeatPassword) {
+    this.updatedUser = false;
+    this.errorPassword = false;
+
+    if (this.form.password === this.form.repeatPassword) {
       this.user.username = this.form.username;
       this.user.password = this.form.password;
       this.user.first_name = this.form.firstName;
       this.user.last_name = this.form.lastName;
-      this.userService.update(this.id, this.user);
+
+      this.userService.update(this.id, this.user)
+      this.updatedUser = true;
+    } else {
+      this.errorPassword = true;
     }
-    
+
   }
 
 }

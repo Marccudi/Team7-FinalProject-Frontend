@@ -77,45 +77,31 @@
       </div>
       <!-- Modal Prestamos -->
       <div class="modal modal-xl fade" id="modalPrest" tabindex="-1" aria-labelledby="exampleModalLabel"
-          aria-hidden="true">
-          <div class="modal-dialog">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Prestamos</h5>
+          aria-hidden="true" >
+          <div class="modal-dialog" >
+              <div class="modal-content" *ngIf="borrowedGames != null && !borrowedGames.pending; else NoPendingGames">
+                  <div class="modal-header" >
+                      <h5 class="modal-title" id="exampleModalLabel">Solicitudes de Prestamos</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                      <div style="border-bottom: solid 1px;" class="ms-0">
-                          <div class="row pb-2">
+                      <div style="border-bottom: solid 1px;" class="ms-0 pt-3" *ngFor="let borrow of borrowedGames">
+                          <div class="row pb-2" *ngIf="borrow.pending">
                               <div class="col">
-                                  Usuario
+                                  {{borrow.userBorrower.username}}
                               </div>
                               <div class="col">
-                                  Tu juego
-                              </div>
-                              <div class="col">
-                                  <input type="date" readonly value="2022-10-13" style="width: 45%;">
-                              </div>
-                              <div class="col">
-                                  <button type="button" class="btn btn-outline-dark">OK</button>
-                                  <button type="button" class="btn btn-outline-dark">X</button>
-                              </div>
+                                {{borrow.game.title}}
+                            </div>
+                            <div class="col">
+                              {{borrow.game.platform.name}}
                           </div>
-                      </div>
-                      <div style="border-bottom: solid 1px;" class="ms-0 pt-3">
-                          <div class="row pb-2">
-                              <div class="col">
-                                  Usuario
-                              </div>
-                              <div class="col">
-                                  Tu juego
-                              </div>
-                              <div class="col">
-                                  <input type="date" readonly value="2022-10-13" style="width: 45%;">
+                        <div class="col">
+                                  <input type="date" value="{{borrow.return_date | date:'dd-MM-yyyy'}}" style="width: 60%;">
                               </div>
                               <div class="col">
                                   <button type="button" class="btn btn-outline-dark">OK</button>
-                                  <button type="button" class="btn btn-outline-dark">X</button>
+                                  <button type="button" class="btn btn-outline-dark ms-1">X</button>
                               </div>
                           </div>
                       </div>
@@ -125,49 +111,50 @@
                       <button type="button" class="btn btn-primary">Save changes</button>
                   </div>
               </div>
+
+              <ng-template #NoPendingGames>
+                <div class="modal-content">
+                  <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Prestamos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    No tienes juegos pendientes de prestamo
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </ng-template>
+
           </div>
       </div>
-      <div class="row">
-          <div class="col">
+
+
+      <!-- Pagina principal -->
+      <div class="row" *ngIf="borrowedGames != null && !borrowedGames.pending; else espera">
+          <div class="col" *ngFor="let borrow of borrowedGames">
               <div class="card mb-3 m-3">
                   <div class="row g-0">
                       <div class="col-md-4 text-center">
-                          <img src="https://imgs.search.brave.com/fMBMBXjLU81nrMlQSbpmC9yDBgiRNt5UZbMwOCPkSwQ/rs:fit:1140:1200:1/g:ce/aHR0cDovLzIuYnAu/YmxvZ3Nwb3QuY29t/Ly1uSDAydnNCd3BZ/RS9VTDRVRUh4MVdx/SS9BQUFBQUFBQUF6/TS9YVFcwTGRNQkdy/Yy9zMTYwMC9qYXF1/ZXR0ZS1maWZhLTEz/LXBjLWNvdmVyLWF2/YW50LWctMTM0ODU4/MDczOS5qcGc" class="img-fluid rounded" style="max-height: 200px;"
-                              alt="...">
+                          <img src={{borrow.game.image}} class="img-fluid rounded" style="max-height: 200px;" alt={{borrow.game.title}}>
                       </div>
                       <div class="col-md-8">
                           <div class="card-body">
-                              <h5 class="card-title">Fifa 13</h5>
-                              <p class="card-text">Consola: PS5</p>
+                              <h5 class="card-title">{{borrow.game.title}}</h5>
+                              <p class="card-text">Consola: {{borrow.game.platform.name}}</p>
                               <hr>
                               <p class="card-text"><small class="text-muted pe-5">fecha inicio prestamo:
-                                      13/09/2022</small> <small class="text-muted ps-5">fecha final del prestamo:
-                                      13/10/2022</small></p>
+                                {{borrow.lend_date}}</small> <small class="text-muted ps-5">fecha final del prestamo:
+                                  {{borrow.return_date}}</small></p>
                           </div>
                       </div>
                   </div>
               </div>
-              <div class="card mb-3 m-3">
-                  <div class="row g-0">
-                      <div class="col-md-4 text-center">
-                          <img src="https://imgs.search.brave.com/fMBMBXjLU81nrMlQSbpmC9yDBgiRNt5UZbMwOCPkSwQ/rs:fit:1140:1200:1/g:ce/aHR0cDovLzIuYnAu/YmxvZ3Nwb3QuY29t/Ly1uSDAydnNCd3BZ/RS9VTDRVRUh4MVdx/SS9BQUFBQUFBQUF6/TS9YVFcwTGRNQkdy/Yy9zMTYwMC9qYXF1/ZXR0ZS1maWZhLTEz/LXBjLWNvdmVyLWF2/YW50LWctMTM0ODU4/MDczOS5qcGc" class="img-fluid rounded" style="max-height: 200px;"
-                              alt="...">
-                      </div>
-                      <div class="col-md-8">
-                          <div class="card-body">
-                              <h5 class="card-title">Fifa 13</h5>
-                              <p class="card-text">Consola: PS5</p>
-                              <hr>
-                              <p class="card-text"><small class="text-muted pe-5">fecha inicio prestamo:
-                                      13/09/2022</small> <small class="text-muted ps-5">fecha final del prestamo:
-                                      13/10/2022</small></p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+
           </div>
       </div>
   </div>
-
+  <ng-template #espera>Esperando datos</ng-template>
 </div>
 <app-footer></app-footer>
