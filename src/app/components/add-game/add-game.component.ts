@@ -95,6 +95,8 @@ export class AddGameComponent implements OnInit {
               option.selected = true;
             }
           }
+
+
         }
       );
     }
@@ -129,7 +131,7 @@ export class AddGameComponent implements OnInit {
               this.error=false;
             },
             error => {
-              this.errortxt='Ha havido algun error';
+              this.errortxt='Ha habido algun error';
               this.error=true;
               this.submitted=false;
               console.log(error);
@@ -165,7 +167,7 @@ export class AddGameComponent implements OnInit {
 
     if (data.title=='' || data.image=='' || data.duration=='' || data.yearReleased=='' || data.ageCalification=='' || data.description=='' ||
     data.developer=='' || data.platform=='' || this.generosString=='') {
-      this.errortxt='Hay halgun campo vacio';
+      this.errortxt='Hay algún campo vacío';
       return false;
     } else if(!data.image.match(regex)){
       this.errortxt='En el apartado imagen no ha insertado una URL correcta';

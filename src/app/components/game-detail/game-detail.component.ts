@@ -41,7 +41,7 @@ export class GameDetailComponent implements OnInit {
 
   botonConfirmar=false;
 
-  prestamoModalTxt= 'Estas seguro de pedir este juego en prestamo?';
+  prestamoModalTxt= '¿Estás seguro de pedir este juego en préstamo?';
 
   constructor(private route :ActivatedRoute,
               private tokenStorage: TokenStorageService,
