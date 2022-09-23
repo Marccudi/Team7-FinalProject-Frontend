@@ -21,8 +21,6 @@ import { GameHaveGenreService } from 'src/app/service/game-have-genre.service';
 })
 export class AddGameComponent implements OnInit {
 
-  isUpdate : boolean = false;
-
   genres:any;
   selectedGenres:any=[];
   developers:any;
@@ -80,23 +78,32 @@ export class AddGameComponent implements OnInit {
     this.listarDevelopers();
 
     const gameId = this.activatedRoute.snapshot.paramMap.get("id");
-    this.title = "Actualizar juego";
-    console.log("id: "+gameId);
-    if(gameId != null) {
+    if(gameId != null) {                          //Initialize form data if url has id
+      this.title = "Actualizar juego";               
       this.gameService.get(gameId).subscribe(
         data => {
           console.log(data);
           this.game = data;
 
-          let select = (<HTMLSelectElement>document.getElementById('platformSelect'));
-          for (let index = 0; index < select.options.length; index++) {
-            const option = select.options[index];
-            if(option.value == this.game.platform.id){
-              option.selected = true;
+
+          this.developerModel.id = this.game.developer.id;
+          this.developerModel.name = this.game.developer.name;
+
+          console.log("genres: ");
+          console.log(this.genres);
+          let gameGenres: any;
+          this.gameHaveGenreService.getGenresXGame(this.game.id).subscribe(
+            data => {
+              gameGenres = data;
+              console.log(gameGenres);
+              for (let index = 0; index < gameGenres.length; index++) {
+                const gameGenre = gameGenres[index];
+                this.generosString += gameGenre.genre.name + ";";
+              }
+            }, error => {
+              console.log(error);
             }
-          }
-
-
+          );
         }
       );
     }
@@ -131,7 +138,7 @@ export class AddGameComponent implements OnInit {
               this.error=false;
             },
             error => {
-              this.errortxt='Ha habido algun error';
+              this.errortxt='Ha habido algún error';
               this.error=true;
               this.submitted=false;
               console.log(error);

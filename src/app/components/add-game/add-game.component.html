@@ -1,4 +1,4 @@
-<app-header *ngIf="!isUpdate"></app-header>
+<app-header></app-header>
 <div id="body " class="body">
 
   <!-- ############################## Game Form ############################## -->
@@ -126,7 +126,8 @@
                     <input class="me-2" type="radio"
                     name="developer"
                     value="{{developer.id}}"
-                    (change)="OnChangePlatform($event)">
+                    (change)="OnChangePlatform($event)"
+                    [checked]="developer.id == game.developer.id">
                     <label>{{developer.name}}</label>
                   </div>
               </div>
@@ -139,4 +140,4 @@
 
   </div>
 </div>
-<app-footer *ngIf="!isUpdate"></app-footer>
+<app-footer></app-footer>
