@@ -61,6 +61,8 @@ export class AddGameComponent implements OnInit {
 
   generosString:string='';
   submitted = false;
+  error = false;
+  errortxt='';
   date:any = new Date();
 
   constructor(private gameService: GameService,
@@ -119,38 +121,60 @@ export class AddGameComponent implements OnInit {
         owner: this.tokenStorage.getUser(),
       }
 
-      console.log(data)
-      this.gameService.create(data)
-        .subscribe(
-          response => {
-            console.log(response);
-            this.game=response;
-            this.submitted= true;
-          },
-          error => {
-            console.log(error);
+      if (this.comprovarForm(data)) {
+        console.log(data)
+        this.gameService.create(data)
+          .subscribe(
+            response => {
+              console.log(response);
+              this.game=response;
+              this.submitted= true;
+              this.error=false;
+            },
+            error => {
+              this.errortxt='Ha havido algun error';
+              this.error=true;
+              this.submitted=false;
+              console.log(error);
+            });
+        setTimeout(() => {
+          this.selectedGenres.forEach((genre : any) => {
+            let gameHaveGenreData = {
+                game: this.game,
+                genre: genre
+            };
+            console.log(gameHaveGenreData)
+            this.gameHaveGenreService.create(gameHaveGenreData)
+              .subscribe(
+                response => {
+                  console.log(response);
+                },
+                error => {
+                  console.log(error);
+                });
           });
-      setTimeout(() => {
-        this.selectedGenres.forEach((genre : any) => {
-          let gameHaveGenreData = {
-              game: this.game,
-              genre: genre
-          };
-          console.log(gameHaveGenreData)
-          this.gameHaveGenreService.create(gameHaveGenreData)
-            .subscribe(
-              response => {
-                console.log(response);
-              },
-              error => {
-                console.log(error);
-              });
-        });
-      }, 1000);
+        }, 1000);
+      }else{
+        this.error=true;
+      }
     }, 500);
 
-    //this.router.navigate(['mis-juegos']);
+  }
 
+  comprovarForm(data:Game){
+
+    let exp = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+    let regex = new RegExp(exp);
+
+    if (data.title=='' || data.image=='' || data.duration=='' || data.yearReleased=='' || data.ageCalification=='' || data.description=='' ||
+    data.developer=='' || data.platform=='' || this.generosString=='') {
+      this.errortxt='Hay halgun campo vacio';
+      return false;
+    } else if(!data.image.match(regex)){
+      this.errortxt='En el apartado imagen no ha insertado una URL correcta';
+      return false;
+    }
+      return true;
   }
 
   listarGeneros():void{

@@ -39,6 +39,10 @@ export class GameDetailComponent implements OnInit {
   activeGame:any;
   submitted:any;
 
+  botonConfirmar=false;
+
+  prestamoModalTxt= 'Estas seguro de pedir este juego en prestamo?';
+
   constructor(private route :ActivatedRoute,
               private tokenStorage: TokenStorageService,
               private gameService: GameService,
@@ -51,7 +55,6 @@ export class GameDetailComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.getGame(this.id);
     this.getGenresXGame(this.id);
-
 
   }
 
@@ -106,7 +109,6 @@ export class GameDetailComponent implements OnInit {
 
   setActiveGame(game: any) {
     this.activeGame = game;
-
   }
 
   crearPeticionPrestamo(){
@@ -130,6 +132,12 @@ export class GameDetailComponent implements OnInit {
       error => {
         console.log(error);
     });
+
+    this.botonConfirmar=true;
+    this.prestamoModalTxt='Has realizado la petición de prestamo correctamente';
+
+    window.open('replayteam7@gmail.com?subject=subject&body=body');
+
   }
 
 }
