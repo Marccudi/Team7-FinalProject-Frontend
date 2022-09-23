@@ -112,11 +112,11 @@ export class GameDetailComponent implements OnInit {
   crearPeticionPrestamo(){
 
     const borrow: Borrow = {
-      idGame: this.activeGame,
-      idOwner: this.activeGame.owner,
-      idBorrower: this.tokenStorage.getUser(),
-      lendDate: new Date().toISOString().slice(0, 10),
-      returnDate: new Date().toISOString().slice(0, 10),
+      game: this.activeGame,
+      userOwner: this.activeGame.owner,
+      userBorrower: this.tokenStorage.getUser(),
+      lend_date: new Date().toISOString().slice(0, 10),
+      return_date: new Date().toISOString().slice(0, 10),
       pending: true
     }
 
