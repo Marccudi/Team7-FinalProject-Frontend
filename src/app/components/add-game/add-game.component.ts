@@ -28,7 +28,6 @@ export class AddGameComponent implements OnInit {
   developers:any;
   platforms:any;
   title = "Nuevo Juego";
-  selectedPlatform = 11;
 
   developerModel: Developer ={
     id:'',
@@ -90,14 +89,12 @@ export class AddGameComponent implements OnInit {
           this.game = data;
 
           let select = (<HTMLSelectElement>document.getElementById('platformSelect'));
-          console.log("select value: "+select);
-          console.log(select);
-          console.log("select ngvalue: "+this.selectedPlatform);
-          console.log(this.selectedPlatform);
-          select.value = this.game.platform.id;
-          select.selectedIndex = 2;
-          console.log("select value: "+select);
-          console.log(select);
+          for (let index = 0; index < select.options.length; index++) {
+            const option = select.options[index];
+            if(option.value == this.game.platform.id){
+              option.selected = true;
+            }
+          }
         }
       );
     }
