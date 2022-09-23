@@ -30,5 +30,15 @@ export class BorrowsService {
     console.log(url);
     return this.http.get<Game[]>(url);
   }
+  delBorrow(idBorrow:number): Observable<Borrow>{
+    let url = `${baseURL}/${idBorrow}`;
+    console.log(url);
+    return this.http.delete(url)
+
+  }
+  saveBorrow(idBorrow:number, newBorrow:any): Observable<Borrow>{
+    let url = `${baseURL}/${idBorrow}`;
+    return this.http.put(url,newBorrow);
+  }
 
 }

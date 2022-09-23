@@ -84,31 +84,35 @@
                       <h5 class="modal-title" id="exampleModalLabel">Solicitudes de Prestamos</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <div class="modal-body">
-                      <div style="border-bottom: solid 1px;" class="ms-0 pt-3" *ngFor="let borrow of borrowedGames">
-                          <div class="row pb-2" *ngIf="borrow.pending">
-                              <div class="col">
-                                  {{borrow.userBorrower.username}}
-                              </div>
-                              <div class="col">
+                  <div class="modal-body" >
+                    <span *ngFor="let borrow of borrowedGames">
+                      <div style="border-bottom: solid 1px;" class="ms-0 pt-3" *ngIf="borrow.pending">
+                        <form name="form" novalidate>
+                          <div class="row pb-2" >
+                            <div class="col">
+                              {{borrow.userBorrower.username}}
+                            </div>
+                            <div class="col">
                                 {{borrow.game.title}}
                             </div>
                             <div class="col">
                               {{borrow.game.platform.name}}
+                            </div>
+                            <div class="col">
+                              <input type="date" #dateInput min="{{date}}" value="{{date}}" style="width: 60%;">
+                            </div>
+                            <div class="col">
+                              <button type="button" (click)="saveBorrow(borrow.id, dateInput.value)" class="btn btn-outline-dark">OK</button>
+                              <button type="button" (click)="delBorrow(borrow.id)" class="btn btn-outline-dark ms-1">X</button>
+                            </div>
                           </div>
-                        <div class="col">
-                                  <input type="date" value="{{borrow.return_date | date:'dd-MM-yyyy'}}" style="width: 60%;">
-                              </div>
-                              <div class="col">
-                                  <button type="button" class="btn btn-outline-dark">OK</button>
-                                  <button type="button" class="btn btn-outline-dark ms-1">X</button>
-                              </div>
-                          </div>
+                        </form>
                       </div>
+                    </span>
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
+                      <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                   </div>
               </div>
 
