@@ -13,8 +13,8 @@
               </div>
               <div class="col mb-3 ">
                   <label for="platformSelect" class="form-label">Plataforma: </label>
-                  <select [(ngModel)]="selectedPlatform" id="platformSelect" class="form-select" required [(ngModel)]="game.platform" name="platform">
-                    <option *ngFor="let platform of platforms" [value]="platform.id">{{platform.name}}</option>
+                  <select id="platformSelect" class="form-select" required [(ngModel)]="game.platform.id" name="platform">
+                    <option *ngFor="let platform of platforms" [value]="platform.id" [selected]="platform.id == game.platform.id">{{platform.name}}</option>
                   </select>
               </div>
           </div>
