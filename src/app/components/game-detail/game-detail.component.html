@@ -43,7 +43,7 @@
           <div class="row">
               <div class="col" *ngIf="owns == false; else espera">
                   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#intercambioModal">Intercambio</button>
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#prestamoModal">Prestamo</button>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#prestamoModal" (click)="setActiveGame(currentGame)">Prestamo</button>
               </div>
               <ng-template #espera>
                 <div class="col">
@@ -87,11 +87,11 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ...
+          Estas seguro de pedir este juego en prestamo?
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-success" (click)="crearPeticionPrestamo()">Confirmar</button>
         </div>
       </div>
     </div>

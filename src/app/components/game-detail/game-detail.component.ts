@@ -5,6 +5,8 @@ import { Game } from '../../models/game';
 import { GameService } from '../../service/game.service';
 import { GameHaveGenre } from '../../models/game-have-genre';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
+import { Borrow } from "../../models/borrow";
+import { BorrowsService } from 'src/app/service/borrows.service';
 
 @Component({
   selector: 'app-game-detail',
@@ -34,8 +36,15 @@ export class GameDetailComponent implements OnInit {
   id = '';
   imagePegi= '';
   owns:any;
+  activeGame:any;
+  submitted:any;
 
-  constructor(private route :ActivatedRoute,private tokenStorage: TokenStorageService, private gameService: GameService, private router: Router, private gameHaveGenreService: GameHaveGenreService) { }
+  constructor(private route :ActivatedRoute,
+              private tokenStorage: TokenStorageService,
+              private gameService: GameService,
+              private router: Router,
+              private gameHaveGenreService: GameHaveGenreService,
+              private borrowService: BorrowsService) { }
 
   ngOnInit(): void {
     this.message='';
@@ -93,6 +102,34 @@ export class GameDetailComponent implements OnInit {
       console.log(false)
       return false;
     }
+  }
+
+  setActiveGame(game: any) {
+    this.activeGame = game;
+
+  }
+
+  crearPeticionPrestamo(){
+
+    const borrow: Borrow = {
+      idGame: this.activeGame,
+      idOwner: this.activeGame.owner,
+      idBorrower: this.tokenStorage.getUser(),
+      lendDate: new Date().toISOString().slice(0, 10),
+      returnDate: new Date().toISOString().slice(0, 10),
+      pending: true
+    }
+
+    console.log(JSON.stringify(borrow));
+    this.borrowService.create(borrow)
+    .subscribe(
+      response => {
+        console.log(response);
+        this.submitted= true;
+      },
+      error => {
+        console.log(error);
+    });
   }
 
 }
