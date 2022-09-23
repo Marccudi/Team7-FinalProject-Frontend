@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Game } from 'src/app/models/game';
 import { Developer } from 'src/app/models/developer';
@@ -21,10 +21,13 @@ import { GameHaveGenreService } from 'src/app/service/game-have-genre.service';
 })
 export class AddGameComponent implements OnInit {
 
+  isUpdate : boolean = false;
+
   genres:any;
   selectedGenres:any=[];
   developers:any;
   platforms:any;
+  title = "Nuevo Juego";
 
   developerModel: Developer ={
     id:'',
@@ -65,7 +68,8 @@ export class AddGameComponent implements OnInit {
               private genreService: GenreService,
               private platformService: PlatformService,
               private router:Router,
-              private gameHaveGenreService :GameHaveGenreService) {
+              private gameHaveGenreService :GameHaveGenreService,
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -73,7 +77,17 @@ export class AddGameComponent implements OnInit {
     this.listarPlatforms();
     this.listarDevelopers();
 
-
+    const gameId = this.activatedRoute.snapshot.paramMap.get("id");
+    this.title = "Actualizar juego";
+    console.log("id: "+gameId);
+    if(gameId != null) {
+      this.gameService.get(gameId).subscribe(
+        data => {
+          console.log(data);
+          this.game = data;
+        }
+      );
+    }
   }
 
   saveGame():void{

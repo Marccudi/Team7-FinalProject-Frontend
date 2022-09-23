@@ -1,10 +1,10 @@
-<app-header></app-header>
+<app-header *ngIf="!isUpdate"></app-header>
 <div id="body " class="body">
 
   <!-- ############################## Game Form ############################## -->
 
   <div class="game-form container p-5">
-      <h1>Nuevo Juego</h1>
+      <h1>{{title}}</h1>
       <form class="p-2">
           <div class="row row-cols-1 row-cols-lg-2 row-cols-sm-1">
               <div class="col mb-3 ">
@@ -133,4 +133,4 @@
 
   </div>
 </div>
-<app-footer></app-footer>
+<app-footer *ngIf="!isUpdate"></app-footer>

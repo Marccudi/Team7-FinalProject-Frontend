@@ -38,7 +38,9 @@ export class MyGamesComponent implements OnInit {
     this.activeGame = game;
   }
 
-  editar(idgame:string){}
+  editar(idgame:string){
+    this.router.navigate(["juego-editar/"+idgame]);
+  }
 
   borrar(){
     this.gameService.delete(this.activeGame.id, this.tokenStorage.getUser().id).subscribe(

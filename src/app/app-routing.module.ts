@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'perfil', component: ProfileComponent },
   { path: 'juego/:id', component: GameDetailComponent },
   { path: 'juego-nuevo', component: AddGameComponent },
+  { path: 'juego-editar/:id', component: AddGameComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'register', component: RegisterComponent },
