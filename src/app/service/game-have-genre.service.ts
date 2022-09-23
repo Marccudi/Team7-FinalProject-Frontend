@@ -17,4 +17,8 @@ export class GameHaveGenreService {
     console.log(url);
     return this.http.get<GameHaveGenre[]>(url);
   }
+
+  create(data:any):Observable<any>{
+    return this.http.post(baseURL, data);
+  }
 }

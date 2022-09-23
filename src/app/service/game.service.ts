@@ -29,4 +29,15 @@ export class GameService {
     console.log(url);
     return this.http.get<Game[]>(url);
   }
+
+  create(data:any):Observable<any>{
+    console.log("URL"+baseURL);
+    console.log('DATA:');
+    console.log(data);
+    return this.http.post(baseURL, data);
+  }
+
+  delete(idGame: any, idUser: any): Observable<any> {
+    return this.http.delete(baseURL+'/'+idGame+'/'+idUser);
+  }
 }

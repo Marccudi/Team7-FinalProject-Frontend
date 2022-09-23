@@ -1,6 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { Game } from 'src/app/models/game';
+import { Developer } from 'src/app/models/developer';
+import { Genre } from 'src/app/models/genre';
+import { Platform } from 'src/app/models/platform';
+import { GameHaveGenre } from "../../models/game-have-genre";
+
 import { TokenStorageService } from 'src/app/service/token-storage.service';
+import { GameService } from 'src/app/service/game.service';
+import { DeveloperService } from 'src/app/service/developer.service';
+import { GenreService } from 'src/app/service/genre.service';
+import { PlatformService } from 'src/app/service/platform.service';
+import { GameHaveGenreService } from 'src/app/service/game-have-genre.service';
 
 @Component({
   selector: 'app-add-game',
@@ -9,9 +21,216 @@ import { TokenStorageService } from 'src/app/service/token-storage.service';
 })
 export class AddGameComponent implements OnInit {
 
-  constructor() { }
+  genres:any;
+  selectedGenres:any=[];
+  developers:any;
+  platforms:any;
+
+  developerModel: Developer ={
+    id:'',
+    name: ''
+  }
+  genreModel: Genre ={
+    id:'',
+    name: ''
+  }
+  platformModel: Platform ={
+    id:'',
+    name: ''
+  }
+
+  game: Game = {
+    id: '',
+    title: '',
+    image:'',
+    duration: '',
+    yearReleased: '',
+    ageCalification: '',
+    description: '',
+    dateInserted: '',
+    enabled: '',
+    developer: '',
+    platform: '',
+    owner:''
+  };
+
+
+  generosString:string='';
+  submitted = false;
+  date:any = new Date();
+
+  constructor(private gameService: GameService,
+              private tokenStorage: TokenStorageService,
+              private developerService: DeveloperService,
+              private genreService: GenreService,
+              private platformService: PlatformService,
+              private router:Router,
+              private gameHaveGenreService :GameHaveGenreService) {
+  }
 
   ngOnInit(): void {
+    this.listarGeneros();
+    this.listarPlatforms();
+    this.listarDevelopers();
+
+
+  }
+
+  saveGame():void{
+    this.getPlataforma(this.game.platform);
+
+    setTimeout(() => {
+      const data = {
+        title: this.game.title,
+        image: this.game.image,
+        duration: this.game.duration,
+        yearReleased: this.game.yearReleased,
+        ageCalification: this.game.ageCalification,
+        description: this.game.description,
+        dateInserted: this.formatDate(this.date),
+        enabled: true,
+        developer: this.developerModel,
+        platform: this.platformModel,
+        owner: this.tokenStorage.getUser(),
+      }
+
+      console.log(data)
+      this.gameService.create(data)
+        .subscribe(
+          response => {
+            console.log(response);
+            this.game=response;
+            this.submitted= true;
+          },
+          error => {
+            console.log(error);
+          });
+      setTimeout(() => {
+        this.selectedGenres.forEach((genre : any) => {
+          let gameHaveGenreData = {
+              game: this.game,
+              genre: genre
+          };
+          console.log(gameHaveGenreData)
+          this.gameHaveGenreService.create(gameHaveGenreData)
+            .subscribe(
+              response => {
+                console.log(response);
+              },
+              error => {
+                console.log(error);
+              });
+        });
+      }, 1000);
+    }, 500);
+
+    //this.router.navigate(['mis-juegos']);
+
+  }
+
+  listarGeneros():void{
+
+    this.genreService.getAll()
+    .subscribe(
+      data => {
+        this.genres = data;
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      });
+  }
+
+  listarPlatforms():void{
+    this.platformService.getAll()
+      .subscribe(
+        data => {
+          this.platforms = data;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+    });
+  }
+
+  listarDevelopers():void{
+    this.developerService.getAll()
+      .subscribe(
+        data => {
+          this.developers = data;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+    });
+  }
+
+  formatDate(date:Date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+  }
+
+  getPlataforma(id:any){
+    this.platformService.get(id)
+      .subscribe(
+        data => {
+          this.platformModel = data;
+          console.log(this.platformModel);
+        },
+        error => {
+          console.log(error);
+      });
+  }
+
+  OnChangePlatform (event: any) {
+    this.developerService.get(event.target.value)
+      .subscribe(
+        data => {
+          this.developerModel = data;
+          console.log(this.developerModel);
+        },
+        error => {
+          console.log(error);
+      });
+  }
+
+  OnChangeGenre (genre:any, event :any) {
+  this.genreService.get(genre)
+    .subscribe(
+      data => {
+        this.genreModel = data;
+        if (event.checked) {
+          this.selectedGenres.push(this.genreModel);
+          console.log(this.selectedGenres)
+        }else{
+          for (let i = 0; i < this.selectedGenres.length; i++) {
+            if (this.selectedGenres[i].id === this.genreModel.id) {
+              console.log(this.selectedGenres)
+              this.selectedGenres.splice(i,1);
+            }
+          }
+        }
+      },
+      error => {
+        console.log(error);
+    });
+  }
+
+  onSubmit(){
+    console.log(this.selectedGenres);
+    this.generosString='';
+    this.selectedGenres.forEach((genero: any) => {
+      this.generosString+=genero.name+';';
+    });
   }
 
 }

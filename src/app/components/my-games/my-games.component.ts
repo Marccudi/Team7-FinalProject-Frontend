@@ -11,6 +11,7 @@ import { TokenStorageService } from 'src/app/service/token-storage.service';
 export class MyGamesComponent implements OnInit {
 
   games:any;
+  activeGame:any;
   error:string = '';
 
   constructor(private router: Router, private gameService: GameService, private route :ActivatedRoute, private tokenStorage: TokenStorageService) { }
@@ -33,8 +34,20 @@ export class MyGamesComponent implements OnInit {
     )
   }
 
+  setActiveGame(game: any) {
+    this.activeGame = game;
+  }
+
   editar(idgame:string){}
 
-  borrar(idgame:string){}
+  borrar(){
+    this.gameService.delete(this.activeGame.id, this.tokenStorage.getUser().id).subscribe(
+      data => {
+        console.log(data);
+      }, error => {
+        console.log(error);
+      }
+    );
+  }
 
 }
