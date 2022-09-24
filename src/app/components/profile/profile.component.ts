@@ -51,7 +51,8 @@ export class ProfileComponent implements OnInit {
       }
     }else{
       console.log(this.user);
-      //this.userService.update(this.id, this.user);
+      this.userService.update(this.id, this.user);
+      this.updatedUser = true;
     }
   }
 

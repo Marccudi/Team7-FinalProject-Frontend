@@ -95,7 +95,7 @@
                 <h5 class="modal-title" id="generoModalLabel">Generos </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <form (ngSubmit)="onSubmit()" #form="ngForm">
+              <form (ngSubmit)="onSubmitGenres()" #form="ngForm">
                 <div class="modal-body">
                     <div class="input" *ngFor="let genre of genres">
                       <input class="me-2" type="checkbox"
@@ -127,7 +127,7 @@
                     <input class="me-2" type="radio"
                     name="developer"
                     value="{{developer.id}}"
-                    (change)="OnChangePlatform($event)"
+                    (change)="OnChangeDeveloper($event)"
                     [checked]="developer.id == game.developer.id">
                     <label>{{developer.name}}</label>
                   </div>

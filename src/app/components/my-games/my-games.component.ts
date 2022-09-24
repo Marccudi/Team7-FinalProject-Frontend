@@ -50,6 +50,10 @@ export class MyGamesComponent implements OnInit {
         console.log(error);
       }
     );
+    setTimeout(() =>{
+      window.location.reload();
+    },1000);
+
   }
 
 }
