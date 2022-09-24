@@ -2,7 +2,7 @@
 <app-side-nav-bar></app-side-nav-bar>
 
 <div id="body" class="body">
-  <app-side-nav></app-side-nav>
+  <app-side-nav [developers]="gameDevelopers" [genres]="gameGenres" [platforms]="gamePlatforms"></app-side-nav>
   <!-- ############################## Game List ############################## -->
 
   <div id="gameList" class="game-list container-fluid text-center w-100" *ngIf="games != null; else espera">

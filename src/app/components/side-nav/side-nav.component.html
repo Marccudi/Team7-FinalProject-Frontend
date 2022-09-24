@@ -17,22 +17,10 @@
                           Todos
                       </label>
                   </div>
-                  <div class="form-check">
-                      <input class="form-check-input" type="radio" name="genres-radio" id="flexRadioDefault2">
-                      <label class="form-check-label" for="flexRadioDefault2">
-                          Accion
-                      </label>
-                  </div>
-                  <div class="form-check">
-                      <input class="form-check-input" type="radio" name="genres-radio" id="flexRadioDefault3">
-                      <label class="form-check-label" for="flexRadioDefault3">
-                          Shooter
-                      </label>
-                  </div>
-                  <div class="form-check">
-                      <input class="form-check-input" type="radio" name="genres-radio" id="flexRadioDefault4">
-                      <label class="form-check-label" for="flexRadioDefault4">
-                          Estrategia
+                  <div *ngFor="let genre of genres">
+                      <input class="form-check-input" type="radio" name="{{genre}}" id="{{genre}}">
+                      <label class="form-check-label" for="{{genre}}">
+                          {{genre}}
                       </label>
                   </div>
               </div>
@@ -52,22 +40,10 @@
                           Todos
                       </label>
                   </div>
-                  <div class="form-check">
-                      <input class="form-check-input" type="radio" name="platforms-radio" id="flexRadioDefault2">
-                      <label class="form-check-label" for="flexRadioDefault2">
-                          Nintendo
-                      </label>
-                  </div>
-                  <div class="form-check">
-                      <input class="form-check-input" type="radio" name="platforms-radio" id="flexRadioDefault3">
-                      <label class="form-check-label" for="flexRadioDefault3">
-                          PS2
-                      </label>
-                  </div>
-                  <div class="form-check">
-                      <input class="form-check-input" type="radio" name="platforms-radio" id="flexRadioDefault4">
-                      <label class="form-check-label" for="flexRadioDefault4">
-                          Xbox one
+                  <div *ngFor="let platform of platforms">
+                      <input class="form-check-input" type="radio" name="{{platform}}" id="{{platform}}">
+                      <label class="form-check-label" for="{{platform}}">
+                          {{platform}}
                       </label>
                   </div>
               </div>
@@ -87,22 +63,10 @@
                           Todos
                       </label>
                   </div>
-                  <div class="form-check">
-                      <input class="form-check-input" type="radio" name="developers-radio" id="flexRadioDefault2">
-                      <label class="form-check-label" for="flexRadioDefault2">
-                          Ubisoft
-                      </label>
-                  </div>
-                  <div class="form-check">
-                      <input class="form-check-input" type="radio" name="developers-radio" id="flexRadioDefault3">
-                      <label class="form-check-label" for="flexRadioDefault3">
-                          Electronic Arts
-                      </label>
-                  </div>
-                  <div class="form-check">
-                      <input class="form-check-input" type="radio" name="developers-radio" id="flexRadioDefault4">
-                      <label class="form-check-label" for="flexRadioDefault4">
-                          Blizzard
+                  <div *ngFor="let developer of developers">
+                      <input class="form-check-input" type="radio" name="{{developer}}" id="{{developer}}">
+                      <label class="form-check-label" for="{{developer}}">
+                          {{developer}}
                       </label>
                   </div>
               </div>

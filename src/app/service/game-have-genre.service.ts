@@ -15,7 +15,6 @@ export class GameHaveGenreService {
 
   getGenresXGame(idGame: any): Observable<GameHaveGenre[]> {
     let url = `${baseURL}/game/${idGame}`;
-    console.log(url);
     return this.http.get<GameHaveGenre[]>(url);
   }
 

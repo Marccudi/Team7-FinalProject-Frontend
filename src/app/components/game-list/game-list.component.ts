@@ -3,6 +3,8 @@ import { GameService } from "../../service/game.service";
 import { ActivatedRoute, Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
 import { Game } from 'src/app/models/game';
+import { filter } from 'rxjs/operators';
+import { GameHaveGenreService } from 'src/app/service/game-have-genre.service';
 
 @Component({
   selector: 'app-game-list',
@@ -11,38 +13,54 @@ import { Game } from 'src/app/models/game';
 })
 export class GameListComponent implements OnInit {
 
-  games:any;
-  error:string = '';
+  games: any;
+  error: string = '';
+  
+  gameDevelopers: string[] = [];  //Data to pass to the side bar
+  gameGenres: string[] = [];
+  gamePlatforms: string[] = [];
 
-  constructor(private router: Router, private gameService: GameService, private route :ActivatedRoute, private tokenStorage: TokenStorageService) {
+  constructor(private router: Router, private gameService: GameService, private route: ActivatedRoute, private tokenStorage: TokenStorageService, private gameHaveGenreService: GameHaveGenreService) {
     // force route reload whenever params change;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-   }
+  }
 
   ngOnInit(): void {
     this.getAllGames();
-    console.log('ID: '+this.tokenStorage.getUser().id);
+    console.log('ID: ' + this.tokenStorage.getUser().id);
 
   }
 
-  getAllGames(){
+  getAllGames() {
     this.gameService.getAll()
-    .subscribe(
-      result => {
-        this.games = result;
-        this.searchGames();
-      },
-      error => {
-        this.error = error;
-        console.log(error);
-      }
-    );
+      .subscribe(
+        result => {
+          this.games = result;
+          this.filterGames();
+        },
+        error => {
+          this.error = error;
+          console.log(error);
+        }
+      );
   }
 
-  searchGames(){
-    const searchString = this.route.snapshot.paramMap.get("search");      //get url params
+  filterGames() {
+    let searchString = "";
+    this.route.queryParams.subscribe(params => {
+      searchString = params["search"];
+      if (searchString != null) {                                           //enter if url has search param
+        this.searchGames(searchString);
+      }
+      this.saveGameDevelopers();
+      this.saveGameGenres();
+      this.saveGamePlatforms();
+    })
+  }
+
+  searchGames(searchString: string) {
     if (searchString != null) {                                           //enter if url has search param
-      let newGames : any = [];
+      let newGames: any = [];
       for (let index = 0; index < this.games.length; index++) {           //find all games that contain the search string
         const game = this.games[index];
         if (game.title.toLowerCase().lastIndexOf(searchString.toLowerCase()) > -1) {
@@ -53,4 +71,35 @@ export class GameListComponent implements OnInit {
     }
   }
 
+  saveGamePlatforms() {
+    for (let index = 0; index < this.games.length; index++) {
+      const game = this.games[index];
+      if (this.games.indexOf(game.platform.name) == -1) {
+        this.gamePlatforms.push(game.platform.name);
+      }
+    }
+  }
+
+  saveGameDevelopers() {
+    for (let index = 0; index < this.games.length; index++) {
+      const game = this.games[index];
+      if (this.games.indexOf(game.developer.name) == -1) {
+        this.gameDevelopers.push(game.developer.name);
+      }
+    }
+  }
+
+  saveGameGenres() {
+    for (let index = 0; index < this.games.length; index++) {
+      const game = this.games[index];
+      this.gameHaveGenreService.getGenresXGame(game.id).subscribe(data => {
+        for (let index = 0; index < data.length; index++) {
+          const gameHaveGenre = data[index];
+          if (this.gameGenres.indexOf(gameHaveGenre.genre.name) == -1) {
+            this.gameGenres.push(gameHaveGenre.genre.name);
+          }
+        }
+      });
+    }
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -7,6 +7,10 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./side-nav.component.css']
 })
 export class SideNavComponent implements OnInit {
+
+  @Input() developers = [""];
+  @Input() genres = [""];
+  @Input() platforms = [""];
 
   constructor(private route :ActivatedRoute ) { }
 
