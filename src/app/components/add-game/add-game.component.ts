@@ -262,7 +262,7 @@ export class AddGameComponent implements OnInit {
         });
   }
 
-  OnChangePlatform(event: any) {
+  OnChangeDeveloper(event: any) {
     this.developerService.get(event.target.value)
       .subscribe(
         data => {
