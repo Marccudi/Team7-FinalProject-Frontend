@@ -35,4 +35,8 @@ export class HeaderComponent implements OnInit {
     this.tokenStorageService.signOut()
     this.router.navigate(['/login'])
   }
+
+  search(searchText: string): void {
+    this.router.navigate(['inicio', searchText]);
+  }
 }
