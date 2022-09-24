@@ -100,7 +100,8 @@
                     <div class="input" *ngFor="let genre of genres">
                       <input class="me-2" type="checkbox"
                       name="genre"
-                      (change)="OnChangeGenre(genre.id, $event.target)">
+                      (change)="OnChangeGenre(genre.id, $event.target)"
+                      [checked]="generosString.indexOf(genre.name) > -1">
                       <label>{{genre.name}}</label>
                     </div>
                 </div>

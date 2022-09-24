@@ -25,6 +25,7 @@ export class AddGameComponent implements OnInit {
   selectedGenres:any=[];
   developers:any;
   platforms:any;
+  gameGenres: any;
   title = "Nuevo Juego";
 
   developerModel: Developer ={
@@ -78,26 +79,22 @@ export class AddGameComponent implements OnInit {
     this.listarDevelopers();
 
     const gameId = this.activatedRoute.snapshot.paramMap.get("id");
-    if(gameId != null) {                          //Initialize form data if url has id
+    if(gameId != null) {                                              //Initialize form data if url has an id
       this.title = "Actualizar juego";
       this.gameService.get(gameId).subscribe(
         data => {
           console.log(data);
           this.game = data;
 
-
           this.developerModel.id = this.game.developer.id;
           this.developerModel.name = this.game.developer.name;
 
-          console.log("genres: ");
-          console.log(this.genres);
-          let gameGenres: any;
           this.gameHaveGenreService.getGenresXGame(this.game.id).subscribe(
             data => {
-              gameGenres = data;
-              console.log(gameGenres);
-              for (let index = 0; index < gameGenres.length; index++) {
-                const gameGenre = gameGenres[index];
+              this.gameGenres = data;
+              console.log(this.gameGenres);
+              for (let index = 0; index < this.gameGenres.length; index++) {
+                const gameGenre = this.gameGenres[index];
                 this.generosString += gameGenre.genre.name + ";";
               }
             }, error => {
