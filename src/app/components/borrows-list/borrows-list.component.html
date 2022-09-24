@@ -17,7 +17,7 @@
           </div>
           <div class="col">
               <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
-                  data-bs-target="#modalInt">Solicitudes de intercambio</button>
+                  data-bs-target="#modalInt" (click)="getAllExchangePetitions()">Solicitudes de intercambio</button>
           </div>
           <div class="col">
               <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
@@ -28,43 +28,26 @@
       <div class="modal modal-xl fade" id="modalInt" tabindex="-1" aria-labelledby="exampleModalLabel"
           aria-hidden="true">
           <div class="modal-dialog">
-              <div class="modal-content">
+              <div class="modal-content" *ngIf="exchangePetitions != null else NoPendingExchangesGames">
                   <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel">Intercambios</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                      <div style="border-bottom: solid 1px;" class="ms-0">
+                      <div style="border-bottom: solid 1px;" class="ms-0" *ngFor="let exchangePetition of exchangePetitions">
                           <div class="row pb-2">
                               <div class="col">
-                                  Usuario
+                                Usuario: {{exchangePetition.userNewOwner.username}}
                               </div>
                               <div class="col">
-                                  Tu juego
+                                Tu juego: {{exchangePetition.gameOldOwner.title}}
                               </div>
                               <div class="col">
-                                  Su juego
+                                Su juego: {{exchangePetition.gameNewOwner.title}}
                               </div>
                               <div class="col">
-                                  <button type="button" class="btn btn-outline-dark">OK</button>
-                                  <button type="button" class="btn btn-outline-dark">X</button>
-                              </div>
-                          </div>
-                      </div>
-                      <div style="border-bottom: solid 1px;" class="ms-0 pt-3">
-                          <div class="row pb-2">
-                              <div class="col">
-                                  Usuario
-                              </div>
-                              <div class="col">
-                                  Tu juego
-                              </div>
-                              <div class="col">
-                                  Su juego
-                              </div>
-                              <div class="col">
-                                  <button type="button" class="btn btn-outline-dark">OK</button>
-                                  <button type="button" class="btn btn-outline-dark">X</button>
+                                  <button type="button" class="btn btn-outline-dark" (click)="saveOwn(exchangePetition.id, exchangePetition)">OK</button>
+                                  <button type="button" class="btn btn-outline-dark" (click)="deleteOwn(exchangePetition.id)">X</button>
                               </div>
                           </div>
                       </div>
@@ -73,6 +56,21 @@
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                   </div>
               </div>
+
+              <ng-template #NoPendingExchangesGames>
+                <div class="modal-content">
+                  <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Intercambios</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    No tienes juegos pendientes de Intercambio
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </ng-template>
           </div>
       </div>
       <!-- Modal Prestamos -->

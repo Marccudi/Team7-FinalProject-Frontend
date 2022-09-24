@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Own } from 'src/app/models/own';
 import { BorrowsService } from 'src/app/service/borrows.service';
 import { GameHaveGenreService } from 'src/app/service/game-have-genre.service';
 import { GameService } from 'src/app/service/game.service';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
+import { OwnsService } from "../../service/owns.service";
 
 @Component({
   selector: 'app-borrows-list',
@@ -23,7 +25,11 @@ export class BorrowsListComponent implements OnInit {
   gameGenres: string[] = [];
   gamePlatforms: string[] = [];
 
-  constructor(private tokenStorage: TokenStorageService, private borrowServ: BorrowsService, private gameServ: GameService, private gameHaveGenreService: GameHaveGenreService) { }
+  exchangePetitions:any;
+  newExchangePetition:any
+  editExchangePetition:any;
+
+  constructor(private tokenStorage: TokenStorageService, private borrowServ:BorrowsService, private gameServ:GameService, private ownsService :OwnsService, private gameHaveGenreService: GameHaveGenreService) { }
 
   ngOnInit(): void {
     this.date = new Date().toISOString().slice(0, 10)
@@ -202,5 +208,66 @@ export class BorrowsListComponent implements OnInit {
       });
     }
   }
+  getAllExchangePetitions(){
+    this.ownsService.getExchangesPetitions(this.tokenStorage.getUser().id)
+    .subscribe(
+      result => {
+        this.exchangePetitions=result;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+
+  }
+
+saveOwn(id:any, exchangePetition:any){
+
+  console.log('Guardamos');
+
+  this.editExchangePetition = {
+    gameOldOwner: exchangePetition.gameOldOwner,
+    gameNewOwner: exchangePetition.gameNewOwner,
+    userOldOwner: exchangePetition.userOldOwner,
+    userNewOwner: exchangePetition.userNewOwner,
+    exchange_date: exchangePetition.exchange_date,
+    pending:false
+  };
+
+  console.log(JSON.stringify(this.editExchangePetition))
+
+  this.ownsService.saveOwn(id, this.editExchangePetition)
+  .subscribe (
+    response => {
+      console.log(response);
+    },
+    error => {
+      console.log(error);
+    });
+
+
+  setTimeout(() => {
+    this.newExchangePetition = {
+      gameOldOwner: exchangePetition.gameNewOwner,
+      gameNewOwner: exchangePetition.gameOldOwner,
+      userOldOwner: exchangePetition.userNewOwner,
+      userNewOwner: exchangePetition.userOldOwner,
+      exchange_date: new Date().toISOString().slice(0, 10),
+      pending:false
+    }
+    this.ownsService.create(this.newExchangePetition)
+      .subscribe(
+        response => {
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+      });
+  }),500;
+}
+
+deleteOwn(id:any){
+  console.log('Borramos')
+}
 
 }
