@@ -21,30 +21,32 @@ import { GameHaveGenreService } from 'src/app/service/game-have-genre.service';
 })
 export class AddGameComponent implements OnInit {
 
-  genres:any;
-  selectedGenres:any=[];
-  developers:any;
-  platforms:any;
+  isUpdate = false;
+
+  genres: any;
+  selectedGenres: any = [];
+  developers: any;
+  platforms: any;
   gameGenres: any;
   title = "Nuevo Juego";
 
-  developerModel: Developer ={
-    id:'',
+  developerModel: Developer = {
+    id: '',
     name: ''
   }
-  genreModel: Genre ={
-    id:'',
+  genreModel: Genre = {
+    id: '',
     name: ''
   }
-  platformModel: Platform ={
-    id:'',
+  platformModel: Platform = {
+    id: '',
     name: ''
   }
 
   game: Game = {
     id: '',
     title: '',
-    image:'',
+    image: '',
     duration: '',
     yearReleased: '',
     ageCalification: '',
@@ -53,24 +55,24 @@ export class AddGameComponent implements OnInit {
     enabled: '',
     developer: '',
     platform: this.platformModel,
-    owner:''
+    owner: ''
   };
 
 
-  generosString:string='';
+  generosString: string = '';
   submitted = false;
   error = false;
-  errortxt='';
-  date:any = new Date();
+  errortxt = '';
+  date: any = new Date();
 
   constructor(private gameService: GameService,
-              private tokenStorage: TokenStorageService,
-              private developerService: DeveloperService,
-              private genreService: GenreService,
-              private platformService: PlatformService,
-              private router:Router,
-              private gameHaveGenreService :GameHaveGenreService,
-              private activatedRoute: ActivatedRoute) {
+    private tokenStorage: TokenStorageService,
+    private developerService: DeveloperService,
+    private genreService: GenreService,
+    private platformService: PlatformService,
+    private router: Router,
+    private gameHaveGenreService: GameHaveGenreService,
+    private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -79,7 +81,8 @@ export class AddGameComponent implements OnInit {
     this.listarDevelopers();
 
     const gameId = this.activatedRoute.snapshot.paramMap.get("id");
-    if(gameId != null) {                                              //Initialize form data if url has an id
+    if (gameId != null) {                                              //Initialize form data if url has an id
+      this.isUpdate = true;
       this.title = "Actualizar juego";
       this.gameService.get(gameId).subscribe(
         data => {
@@ -95,6 +98,7 @@ export class AddGameComponent implements OnInit {
               console.log(this.gameGenres);
               for (let index = 0; index < this.gameGenres.length; index++) {
                 const gameGenre = this.gameGenres[index];
+                this.selectedGenres.push(gameGenre);
                 this.generosString += gameGenre.genre.name + ";";
               }
             }, error => {
@@ -106,7 +110,7 @@ export class AddGameComponent implements OnInit {
     }
   }
 
-  saveGame():void{
+  saveGame(): void {
     this.getPlataforma(this.game.platform.id);
 
     setTimeout(() => {
@@ -126,25 +130,44 @@ export class AddGameComponent implements OnInit {
 
       if (this.comprovarForm(data)) {
         console.log(data)
-        this.gameService.create(data)
-          .subscribe(
-            response => {
-              console.log(response);
-              this.game=response;
-              this.submitted= true;
-              this.error=false;
-            },
-            error => {
-              this.errortxt='Ha habido algún error';
-              this.error=true;
-              this.submitted=false;
-              console.log(error);
-            });
+
+        if (this.isUpdate) {
+          this.gameService.update(this.game.id, data)
+            .subscribe(
+              response => {
+                console.log(response);
+                this.game = response;
+                this.submitted = true;
+                this.error = false;
+              }, error => {
+                this.errortxt = 'Ha habido algún error';
+                this.error = true;
+                this.submitted = false;
+                console.log(error);
+              }
+            );
+        } else {
+          this.gameService.create(data)
+            .subscribe(
+              response => {
+                console.log(response);
+                this.game = response;
+                this.submitted = true;
+                this.error = false;
+              },
+              error => {
+                this.errortxt = 'Ha habido algún error';
+                this.error = true;
+                this.submitted = false;
+                console.log(error);
+              });
+        }
+
         setTimeout(() => {
-          this.selectedGenres.forEach((genre : any) => {
+          this.selectedGenres.forEach((genre: any) => {
             let gameHaveGenreData = {
-                game: this.game,
-                genre: genre
+              game: this.game,
+              genre: genre
             };
             console.log(gameHaveGenreData)
             this.gameHaveGenreService.create(gameHaveGenreData)
@@ -157,43 +180,43 @@ export class AddGameComponent implements OnInit {
                 });
           });
         }, 1000);
-      }else{
-        this.error=true;
+      } else {
+        this.error = true;
       }
     }, 500);
 
   }
 
-  comprovarForm(data:Game){
+  comprovarForm(data: Game) {
 
     let exp = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
     let regex = new RegExp(exp);
 
-    if (data.title=='' || data.image=='' || data.duration=='' || data.yearReleased=='' || data.ageCalification=='' || data.description=='' ||
-    data.developer=='' || data.platform=='' || this.generosString=='') {
-      this.errortxt='Hay algún campo vacío';
+    if (data.title == '' || data.image == '' || data.duration == '' || data.yearReleased == '' || data.ageCalification == '' || data.description == '' ||
+      data.developer == '' || data.platform == '' || this.generosString == '') {
+      this.errortxt = 'Hay algún campo vacío';
       return false;
-    } else if(!data.image.match(regex)){
-      this.errortxt='En el apartado imagen no ha insertado una URL correcta';
+    } else if (!data.image.match(regex)) {
+      this.errortxt = 'En el apartado imagen no ha insertado una URL correcta';
       return false;
     }
-      return true;
+    return true;
   }
 
-  listarGeneros():void{
+  listarGeneros(): void {
 
     this.genreService.getAll()
-    .subscribe(
-      data => {
-        this.genres = data;
-        console.log(data);
-      },
-      error => {
-        console.log(error);
-      });
+      .subscribe(
+        data => {
+          this.genres = data;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
   }
 
-  listarPlatforms():void{
+  listarPlatforms(): void {
     this.platformService.getAll()
       .subscribe(
         data => {
@@ -202,10 +225,10 @@ export class AddGameComponent implements OnInit {
         },
         error => {
           console.log(error);
-    });
+        });
   }
 
-  listarDevelopers():void{
+  listarDevelopers(): void {
     this.developerService.getAll()
       .subscribe(
         data => {
@@ -214,24 +237,24 @@ export class AddGameComponent implements OnInit {
         },
         error => {
           console.log(error);
-    });
+        });
   }
 
-  formatDate(date:Date) {
+  formatDate(date: Date) {
     var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
 
     if (month.length < 2)
-        month = '0' + month;
+      month = '0' + month;
     if (day.length < 2)
-        day = '0' + day;
+      day = '0' + day;
 
     return [year, month, day].join('-');
   }
 
-  getPlataforma(id:any){
+  getPlataforma(id: any) {
     this.platformService.get(id)
       .subscribe(
         data => {
@@ -240,10 +263,10 @@ export class AddGameComponent implements OnInit {
         },
         error => {
           console.log(error);
-      });
+        });
   }
 
-  OnChangePlatform (event: any) {
+  OnChangePlatform(event: any) {
     this.developerService.get(event.target.value)
       .subscribe(
         data => {
@@ -252,36 +275,36 @@ export class AddGameComponent implements OnInit {
         },
         error => {
           console.log(error);
-      });
+        });
   }
 
-  OnChangeGenre (genre:any, event :any) {
-  this.genreService.get(genre)
-    .subscribe(
-      data => {
-        this.genreModel = data;
-        if (event.checked) {
-          this.selectedGenres.push(this.genreModel);
-          console.log(this.selectedGenres)
-        }else{
-          for (let i = 0; i < this.selectedGenres.length; i++) {
-            if (this.selectedGenres[i].id === this.genreModel.id) {
-              console.log(this.selectedGenres)
-              this.selectedGenres.splice(i,1);
+  OnChangeGenre(genre: any, event: any) {
+    this.genreService.get(genre)
+      .subscribe(
+        data => {
+          this.genreModel = data;
+          if (event.checked) {
+            this.selectedGenres.push(this.genreModel);
+            console.log(this.selectedGenres)
+          } else {
+            for (let i = 0; i < this.selectedGenres.length; i++) {
+              if (this.selectedGenres[i].id === this.genreModel.id) {
+                console.log(this.selectedGenres)
+                this.selectedGenres.splice(i, 1);
+              }
             }
           }
-        }
-      },
-      error => {
-        console.log(error);
-    });
+        },
+        error => {
+          console.log(error);
+        });
   }
 
-  onSubmit(){
+  onSubmit() {
     console.log(this.selectedGenres);
-    this.generosString='';
+    this.generosString = '';
     this.selectedGenres.forEach((genero: any) => {
-      this.generosString+=genero.name+';';
+      this.generosString += genero.name + ';';
     });
   }
 
