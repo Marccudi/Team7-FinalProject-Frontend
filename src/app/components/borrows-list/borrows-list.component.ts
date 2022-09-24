@@ -12,6 +12,7 @@ import { TokenStorageService } from 'src/app/service/token-storage.service';
 export class BorrowsListComponent implements OnInit {
   date: any;
   borrowedGames:any;
+  orderedGames:any;
   error:string='';
   game:any;
 
@@ -22,6 +23,7 @@ export class BorrowsListComponent implements OnInit {
   ngOnInit(): void {
     this.date = new Date().toISOString().slice(0, 10)
     this.getBorrowsFromUser();
+    this.getOrderedGames();
   }
 
   getBorrowById(id: number){
@@ -53,6 +55,21 @@ export class BorrowsListComponent implements OnInit {
     )
   }
 
+  getOrderedGames(){
+    this.borrowServ.getBorrowedGamesByBorrower(this.tokenStorage.getUser().id+'')
+    .subscribe(
+      result => {
+        this.orderedGames = result;
+        console.log('Ordered games:'+JSON.stringify(result));
+
+      },
+      error => {
+        this.error = error;
+        console.log('error'+error);
+      }
+    )
+  }
+
   saveBorrow(id:number, date:any){
 
     this.getBorrowById(id);
@@ -61,6 +78,9 @@ export class BorrowsListComponent implements OnInit {
       // console.log('antesIf   '+JSON.stringify(this.newBorrowgame))
       if (this.newBorrowgame.pending) {
         this.newBorrowgame.pending=false
+        //ATENCION
+        //el comentario de abajo hace que cuandodes al ok dentro del modal, los prestamos con ese juego ya no vuelven a salir al modal
+        //this.borrowedGames.pending=false;
       } else {
         this.newBorrowgame.pending=true
       }
@@ -75,6 +95,7 @@ setTimeout(() => {
     .subscribe(
       result => {
         this.newBorrowgame = result;
+        window.location.reload()
         // console.log('games:'+JSON.stringify(result));
       },
       error => {
@@ -106,7 +127,7 @@ this.gameServ.get(id)
       result => {
         this.borrowedGames = result;
         console.log('games:'+JSON.stringify(result));
-
+        window.location.reload()
       },
       error => {
         this.error = error;
