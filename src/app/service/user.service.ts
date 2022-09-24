@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const baseUrl = "https://re-playproject.herokuapp.com/api/users"
+//const baseUrl = "http://localhost:8181/api/users";
 
 @Injectable({
   providedIn: 'root'
