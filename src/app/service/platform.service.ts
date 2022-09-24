@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { Platform } from "../models/platform";
 
 const baseURL = "https://re-playproject.herokuapp.com/api/platforms"
+//const baseURL = "http://localhost:8181/api/platforms"
 
 @Injectable({
   providedIn: 'root'

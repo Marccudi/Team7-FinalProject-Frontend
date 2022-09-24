@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { Genre } from "../models/genre";
 
 const baseURL = "https://re-playproject.herokuapp.com/api/genres"
+//const baseURL = "http://localhost:8181/api/genres"
 
 @Injectable({
   providedIn: 'root'

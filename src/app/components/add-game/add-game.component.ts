@@ -21,14 +21,12 @@ import { GameHaveGenreService } from 'src/app/service/game-have-genre.service';
 })
 export class AddGameComponent implements OnInit {
 
-  isUpdate : boolean = false;
-
   genres:any;
   selectedGenres:any=[];
   developers:any;
   platforms:any;
+  gameGenres: any;
   title = "Nuevo Juego";
-  selectedPlatform = 11;
 
   developerModel: Developer ={
     id:'',
@@ -61,6 +59,8 @@ export class AddGameComponent implements OnInit {
 
   generosString:string='';
   submitted = false;
+  error = false;
+  errortxt='';
   date:any = new Date();
 
   constructor(private gameService: GameService,
@@ -79,23 +79,28 @@ export class AddGameComponent implements OnInit {
     this.listarDevelopers();
 
     const gameId = this.activatedRoute.snapshot.paramMap.get("id");
-    this.title = "Actualizar juego";
-    console.log("id: "+gameId);
-    if(gameId != null) {
+    if(gameId != null) {                                              //Initialize form data if url has an id
+      this.title = "Actualizar juego";
       this.gameService.get(gameId).subscribe(
         data => {
           console.log(data);
           this.game = data;
 
-          let select = (<HTMLSelectElement>document.getElementById('platformSelect'));
-          console.log("select value: "+select);
-          console.log(select);
-          console.log("select ngvalue: "+this.selectedPlatform);
-          console.log(this.selectedPlatform);
-          select.value = this.game.platform.id;
-          select.selectedIndex = 2;
-          console.log("select value: "+select);
-          console.log(select);
+          this.developerModel.id = this.game.developer.id;
+          this.developerModel.name = this.game.developer.name;
+
+          this.gameHaveGenreService.getGenresXGame(this.game.id).subscribe(
+            data => {
+              this.gameGenres = data;
+              console.log(this.gameGenres);
+              for (let index = 0; index < this.gameGenres.length; index++) {
+                const gameGenre = this.gameGenres[index];
+                this.generosString += gameGenre.genre.name + ";";
+              }
+            }, error => {
+              console.log(error);
+            }
+          );
         }
       );
     }
@@ -119,38 +124,60 @@ export class AddGameComponent implements OnInit {
         owner: this.tokenStorage.getUser(),
       }
 
-      console.log(data)
-      this.gameService.create(data)
-        .subscribe(
-          response => {
-            console.log(response);
-            this.game=response;
-            this.submitted= true;
-          },
-          error => {
-            console.log(error);
+      if (this.comprovarForm(data)) {
+        console.log(data)
+        this.gameService.create(data)
+          .subscribe(
+            response => {
+              console.log(response);
+              this.game=response;
+              this.submitted= true;
+              this.error=false;
+            },
+            error => {
+              this.errortxt='Ha habido algún error';
+              this.error=true;
+              this.submitted=false;
+              console.log(error);
+            });
+        setTimeout(() => {
+          this.selectedGenres.forEach((genre : any) => {
+            let gameHaveGenreData = {
+                game: this.game,
+                genre: genre
+            };
+            console.log(gameHaveGenreData)
+            this.gameHaveGenreService.create(gameHaveGenreData)
+              .subscribe(
+                response => {
+                  console.log(response);
+                },
+                error => {
+                  console.log(error);
+                });
           });
-      setTimeout(() => {
-        this.selectedGenres.forEach((genre : any) => {
-          let gameHaveGenreData = {
-              game: this.game,
-              genre: genre
-          };
-          console.log(gameHaveGenreData)
-          this.gameHaveGenreService.create(gameHaveGenreData)
-            .subscribe(
-              response => {
-                console.log(response);
-              },
-              error => {
-                console.log(error);
-              });
-        });
-      }, 1000);
+        }, 1000);
+      }else{
+        this.error=true;
+      }
     }, 500);
 
-    //this.router.navigate(['mis-juegos']);
+  }
 
+  comprovarForm(data:Game){
+
+    let exp = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+    let regex = new RegExp(exp);
+
+    if (data.title=='' || data.image=='' || data.duration=='' || data.yearReleased=='' || data.ageCalification=='' || data.description=='' ||
+    data.developer=='' || data.platform=='' || this.generosString=='') {
+      this.errortxt='Hay algún campo vacío';
+      return false;
+    } else if(!data.image.match(regex)){
+      this.errortxt='En el apartado imagen no ha insertado una URL correcta';
+      return false;
+    }
+      return true;
   }
 
   listarGeneros():void{

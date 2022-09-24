@@ -1,20 +1,20 @@
-<app-header *ngIf="!isUpdate"></app-header>
+<app-header></app-header>
 <div id="body " class="body">
 
   <!-- ############################## Game Form ############################## -->
 
   <div class="game-form container p-5">
-      <h1>{{title}}</h1>
+      <h1><button class="back" routerLink="/mis-juegos"><i class="bi bi-chevron-double-left"></i></button>    {{title}}</h1>
       <form class="p-2">
           <div class="row row-cols-1 row-cols-lg-2 row-cols-sm-1">
               <div class="col mb-3 ">
                 <label for="nombreInput" class="form-label">Nombre: </label>
-                <input type="text" class="form-control" id="nombreInput" required [(ngModel)]="game.title" name="title">
+                <input type="text" class="form-control" id="nombreInput" required="required" [(ngModel)]="game.title" name="title" maxlength="100">
               </div>
               <div class="col mb-3 ">
                   <label for="platformSelect" class="form-label">Plataforma: </label>
-                  <select [(ngModel)]="selectedPlatform" id="platformSelect" class="form-select" required [(ngModel)]="game.platform" name="platform">
-                    <option  *ngFor="let platform of platforms" [value]="platform.id">{{platform.name}}</option>
+                  <select id="platformSelect" class="form-select" required [(ngModel)]="game.platform.id" name="platform">
+                    <option *ngFor="let platform of platforms" [value]="platform.id" [selected]="platform.id == game.platform.id">{{platform.name}}</option>
                   </select>
               </div>
           </div>
@@ -23,7 +23,7 @@
                   <label for="generoInput" class="form-label">Género: </label>
                   <div class="row">
                       <div class="col">
-                          <input type="text" class="form-control" id="generoInput" readonly required [(ngModel)]="generosString" name="genre">
+                          <input type="text" class="form-control" id="generoInput" readonly required="required" [(ngModel)]="generosString" name="genre">
                       </div>
                   <div class="col">
                       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#generoModal">
@@ -36,7 +36,7 @@
                   <label for="developerInput" class="form-label">Desarollador: </label>
                   <div class="row">
                       <div class="col">
-                          <input type="text" class="form-control" id="developerInput" value="a" required [(ngModel)]="developerModel.name" readonly name="developer">
+                          <input type="text" class="form-control" id="developerInput" value="a" required="required" [(ngModel)]="developerModel.name" readonly name="developer">
                       </div>
                       <div class="col">
                           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#desarrolladorModal">
@@ -47,7 +47,7 @@
               </div>
               <div class="mb-3 col">
                 <label for="pegiSelect" class="form-label">PEGI: </label>
-                <select class="form-select" aria-label="pegi-select" id="pegiSelect" required [(ngModel)]="game.ageCalification" name="ageCalification">
+                <select class="form-select" aria-label="pegi-select" id="pegiSelect" required="required" [(ngModel)]="game.ageCalification" name="ageCalification">
                   <option value="PEGI 3">PEGI 3</option>
                   <option value="PEGI 7">PEGI 7</option>
                   <option value="PEGI 12">PEGI 12</option>
@@ -59,25 +59,31 @@
           <div class="row row-cols-1 row-cols-lg-3 row-cols-sm-1">
               <div class="col mb-3 ">
                 <label for="duracionInput" class="form-label">Duración (minutos): </label>
-                <input type="number" class="form-control" id="duracionInput" required [(ngModel)]="game.duration" name="duration">
+                <input type="number" class="form-control" id="duracionInput" required="required" [(ngModel)]="game.duration" name="duration">
               </div>
               <div class="col mb-3 ">
                   <label for="salidaInput" class="form-label">Año salida: </label>
-                  <input type="number" class="form-control" id="salidaInput" required [(ngModel)]="game.yearReleased" name="yearReleased">
+                  <input type="number" class="form-control" id="salidaInput" required="required" [(ngModel)]="game.yearReleased" name="yearReleased">
               </div>
               <div class="col mb-3 ">
                 <label for="imagenInput" class="form-label">Imagen (URL): </label>
-                <input type="text" class="form-control" id="imagenInput" required [(ngModel)]="game.image" name="image">
+                <input type="url" class="form-control" id="imagenInput" required="required" [(ngModel)]="game.image" name="image">
             </div>
           </div>
           <div class="row row-cols-1">
             <div class="col mb-3 ">
               <label for="descripcionInput" class="form-label">Descripción: (254 carcateres maximo)</label>
-              <textarea class="form-control" placeholder="Inserta la descripción del juego" maxlength="254" style="height: 200px" id="descripcionInput" required [(ngModel)]="game.description" name="description"></textarea>
+              <textarea class="form-control" placeholder="Inserta la descripción del juego" maxlength="254" style="height: 200px" id="descripcionInput" required="required" [(ngModel)]="game.description" name="description"></textarea>
             </div>
         </div>
           <div class="row pt-2">
               <button (click)="saveGame()" type="submit" class="btn btn-primary">Submit</button>
+              <div class="alert alert-success mt-2" *ngIf="submitted">
+                Juego insertado correctamente.
+              </div>
+              <div class="alert alert-danger mt-2" *ngIf="error">
+                {{errortxt}}
+              </div>
           </div>
       </form>
 
@@ -94,7 +100,8 @@
                     <div class="input" *ngFor="let genre of genres">
                       <input class="me-2" type="checkbox"
                       name="genre"
-                      (change)="OnChangeGenre(genre.id, $event.target)">
+                      (change)="OnChangeGenre(genre.id, $event.target)"
+                      [checked]="generosString.indexOf(genre.name) > -1">
                       <label>{{genre.name}}</label>
                     </div>
                 </div>
@@ -120,7 +127,8 @@
                     <input class="me-2" type="radio"
                     name="developer"
                     value="{{developer.id}}"
-                    (change)="OnChangePlatform($event)">
+                    (change)="OnChangePlatform($event)"
+                    [checked]="developer.id == game.developer.id">
                     <label>{{developer.name}}</label>
                   </div>
               </div>
@@ -133,4 +141,4 @@
 
   </div>
 </div>
-<app-footer *ngIf="!isUpdate"></app-footer>
+<app-footer></app-footer>
