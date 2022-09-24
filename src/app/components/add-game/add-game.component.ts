@@ -288,7 +288,7 @@ export class AddGameComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  onSubmitGenres() {
     console.log(this.selectedGenres);
     this.generosString = '';
     this.selectedGenres.forEach((genero: any) => {
