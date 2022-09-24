@@ -14,6 +14,7 @@ import { LoginActivateGuard } from './security/login-activate.guard';
 
 const routes: Routes = [
   { path: 'inicio', component: GameListComponent },
+  { path: 'inicio/:search', component: GameListComponent },
   { path: 'mis-juegos', component: MyGamesComponent},
   //, canActivate:[LoginActivateGuard]
   { path: 'mis-prestamos', component: BorrowsListComponent },

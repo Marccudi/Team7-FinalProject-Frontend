@@ -137,6 +137,8 @@
       <!-- Pagina principal -->
       <div class="row" *ngIf="borrowedGames != null && !borrowedGames.pending; else espera">
           <div class="col" *ngFor="let borrow of borrowedGames">
+            <!-- mis prestamos a tiempo -->
+            <span *ngIf="borrow.return_date > date;else deuda">
               <div class="card mb-3 m-3">
                   <div class="row g-0">
                       <div class="col-md-4 text-center">
@@ -146,6 +148,7 @@
                           <div class="card-body">
                               <h5 class="card-title">{{borrow.game.title}}</h5>
                               <p class="card-text">Consola: {{borrow.game.platform.name}}</p>
+                              <p class="card-text">Prestado a: {{borrow.userBorrower.username}}</p>
                               <hr>
                               <p class="card-text"><small class="text-muted pe-5">fecha inicio prestamo:
                                 {{borrow.lend_date | date: 'dd/MM/yyyy'}}</small> <small class="text-muted ps-5">fecha final del prestamo:
@@ -154,10 +157,86 @@
                       </div>
                   </div>
               </div>
-
+            </span>
+            <!-- Mis prestamos tarde -->
+            <ng-template #deuda>
+              <div class="card text-bg-warning mb-3 m-3">
+                <div class="row g-0">
+                    <div class="col-md-4 text-center">
+                        <img src={{borrow.game.image}} class="img-fluid rounded" style="max-height: 200px;" alt={{borrow.game.title}}>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{borrow.game.title}}</h5>
+                            <p class="card-text">Consola: {{borrow.game.platform.name}}</p>
+                            <p class="card-text">Prestado a: {{borrow.userBorrower.username}}</p>
+                            <hr>
+                            <p class="card-text"><small class="text-muted pe-5">fecha inicio prestamo:
+                              {{borrow.lend_date | date: 'dd/MM/yyyy'}}</small> <small class="text-muted ps-5">fecha final del prestamo:
+                                {{borrow.return_date | date: 'dd/MM/yyyy'}}</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </ng-template>
           </div>
       </div>
+    </div>
+    <ng-template #espera>Esperando datos</ng-template>
+
+    <div class="col ps-5 col-6">
+      <h3>Prestamos pedidos</h3>
+    </div>
+
+    <div class="row" *ngIf="orderedGames != null && !orderedGames.pending; else espera">
+      <div class="col" *ngFor="let ordered of orderedGames">
+        <!-- Prestamos pedidos con tiempo -->
+          <span *ngIf="ordered.return_date>date; else tarde">
+            <div class="card mb-3 m-3">
+              <div class="row g-0">
+                  <div class="col-md-4 text-center">
+                      <img src={{ordered.game.image}} class="img-fluid rounded" style="max-height: 200px;" alt={{ordered.game.title}}>
+                  </div>
+                  <div class="col-md-8">
+                      <div class="card-body">
+                          <h5 class="card-title">{{ordered.game.title}}</h5>
+                          <p class="card-text">Consola: {{ordered.game.platform.name}}</p>
+                          <p class="card-text">Dueño: {{ordered.userOwner.username}}</p>
+                          <hr>
+                          <p class="card-text"><small class="text-muted">fecha inicio prestamo:
+                            {{ordered.lend_date | date: 'dd/MM/yyyy'}}</small> <br><small class="text-muted">fecha final del prestamo:
+                              {{ordered.return_date | date: 'dd/MM/yyyy'}}</small></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          </span>
+            <!-- Prestamos pedidos tarde -->
+          <ng-template #tarde>
+            <div class="card text-bg-warning mb-3 m-3">
+              <div class="row g-0">
+                  <div class="col-md-4 text-center">
+                      <img src={{ordered.game.image}} class="img-fluid rounded" style="max-height: 200px;" alt={{ordered.game.title}}>
+                  </div>
+                  <div class="col-md-8">
+                      <div class="card-body">
+                          <h5 class="card-title">{{ordered.game.title}}</h5>
+                          <p class="card-text">Consola: {{ordered.game.platform.name}}</p>
+                          <p class="card-text">Dueño: {{ordered.userOwner.username}}</p>
+                          <hr>
+                          <p class="card-text"><small class="text-muted"> fecha inicio prestamo:
+                            {{ordered.lend_date | date: 'dd/MM/yyyy'}}</small> <br><small class="text-muted">fecha final del prestamo:
+                              {{ordered.return_date | date: 'dd/MM/yyyy'}}</small></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          </ng-template>
+      </div>
+
+
+
+
   </div>
-  <ng-template #espera>Esperando datos</ng-template>
-</div>
+  </div>
 <app-footer></app-footer>

@@ -30,8 +30,8 @@
           <div class="container-fluid col py-4 search">
               <form class="d-flex" role="search">
                   <div class="input-group">
-                      <input class="form-control" type="search" placeholder="Buscar" aria-label="Search">
-                      <button class="btn btn-light start-0" type="submit"><i class="bi bi-search"></i></button>
+                      <input class="form-control" type="search" placeholder="Buscar" aria-label="Search" #searchInput>
+                      <button class="btn btn-light start-0" type="submit" (click)="search(searchInput.value)"><i class="bi bi-search"></i></button>
                   </div>
 
               </form>
