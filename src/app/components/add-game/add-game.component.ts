@@ -32,10 +32,6 @@ export class AddGameComponent implements OnInit {
     id:'',
     name: ''
   }
-  genreModel: Genre ={
-    id:'',
-    name: ''
-  }
   platformModel: Platform ={
     id:'',
     name: ''
@@ -256,25 +252,17 @@ export class AddGameComponent implements OnInit {
   }
 
   OnChangeGenre (genre:any, event :any) {
-  this.genreService.get(genre)
-    .subscribe(
-      data => {
-        this.genreModel = data;
-        if (event.checked) {
-          this.selectedGenres.push(this.genreModel);
+    if (event.checked) {
+      this.selectedGenres.push(genre);
+      console.log(this.selectedGenres)
+    }else{
+      for (let i = 0; i < this.selectedGenres.length; i++) {
+        if (this.selectedGenres[i].id === genre.id) {
           console.log(this.selectedGenres)
-        }else{
-          for (let i = 0; i < this.selectedGenres.length; i++) {
-            if (this.selectedGenres[i].id === this.genreModel.id) {
-              console.log(this.selectedGenres)
-              this.selectedGenres.splice(i,1);
-            }
-          }
+          this.selectedGenres.splice(i,1);
         }
-      },
-      error => {
-        console.log(error);
-    });
+      }
+    }
   }
 
   onSubmit(){

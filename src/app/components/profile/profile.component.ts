@@ -41,22 +41,18 @@ export class ProfileComponent implements OnInit {
     this.updatedUser = false;
     this.errorPassword = false;
 
-    if (this.form.password !='' && this.form.repeatPassword) {
-
+    if (this.form.password !='' && this.form.repeatPassword !='') {
+      if (this.form.password === this.form.repeatPassword) {
+        this.user.password = this.form.password;
+        this.userService.update(this.id, this.user)
+        this.updatedUser = true;
+      } else {
+        this.errorPassword = true;
+      }
+    }else{
+      console.log(this.user);
+      //this.userService.update(this.id, this.user);
     }
-    if (this.form.password === this.form.repeatPassword) {
-
-      this.user.username = this.form.username;
-      this.user.password = this.form.password;
-      this.user.first_name = this.form.firstName;
-      this.user.last_name = this.form.lastName;
-
-      this.userService.update(this.id, this.user)
-      this.updatedUser = true;
-    } else {
-      this.errorPassword = true;
-    }
-
   }
 
 }
