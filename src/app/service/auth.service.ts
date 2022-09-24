@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 const AUTH_API = "https://re-playproject.herokuapp.com/";
+//const AUTH_API = "http://localhost:8181/";
 
 const httpOpt = {
   headers: new HttpHeaders({ 'Content-type' : 'application/json' })

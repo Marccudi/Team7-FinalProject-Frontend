@@ -135,9 +135,6 @@ export class GameDetailComponent implements OnInit {
 
     this.botonConfirmar=true;
     this.prestamoModalTxt='Has realizado la petición de prestamo correctamente';
-
-    window.open('replayteam7@gmail.com?subject=subject&body=body');
-
   }
 
 }
