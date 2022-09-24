@@ -10,11 +10,8 @@ import { TokenStorageService } from 'src/app/service/token-storage.service';
 })
 export class ProfileComponent implements OnInit {
   form: any = {
-    username: null,
-    password: null,
-    repeatPassword: null,
-    firstName: null,
-    lastName: null
+    password: '',
+    repeatPassword: '',
   }
   user: any;
   id: number = 0;
@@ -44,7 +41,11 @@ export class ProfileComponent implements OnInit {
     this.updatedUser = false;
     this.errorPassword = false;
 
+    if (this.form.password !='' && this.form.repeatPassword) {
+
+    }
     if (this.form.password === this.form.repeatPassword) {
+
       this.user.username = this.form.username;
       this.user.password = this.form.password;
       this.user.first_name = this.form.firstName;

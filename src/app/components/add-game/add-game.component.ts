@@ -52,7 +52,7 @@ export class AddGameComponent implements OnInit {
     dateInserted: '',
     enabled: '',
     developer: '',
-    platform: '',
+    platform: this.platformModel,
     owner:''
   };
 
@@ -107,7 +107,7 @@ export class AddGameComponent implements OnInit {
   }
 
   saveGame():void{
-    this.getPlataforma(this.game.platform);
+    this.getPlataforma(this.game.platform.id);
 
     setTimeout(() => {
       const data = {
