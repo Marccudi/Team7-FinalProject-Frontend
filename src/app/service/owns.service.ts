@@ -14,30 +14,29 @@ export class OwnsService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Own[]> {
-    let url = baseURL;
-    console.log(url);
-    return this.http.get<Own[]>(url);
-  }
   get(id: any): Observable<any> {
     let url = `${baseURL}/${id}`;
     console.log(url);
     return this.http.get(url);
   }
-  getBorrowedGamesByOwner(idOwner:any): Observable<Game[]>{
-    let url = baseURL+'/owner/'+idOwner;
+
+  getExchangesPetitions(idOwner:any): Observable<Game[]>{
+    let url = baseURL+'/'+idOwner+"/"+true;
     console.log(url);
     return this.http.get<Game[]>(url);
   }
-  delBorrow(idBorrow:number): Observable<Own>{
+
+  delOwn(idBorrow:number): Observable<Own>{
     let url = `${baseURL}/${idBorrow}`;
     console.log(url);
     return this.http.delete(url)
   }
-  saveBorrow(idBorrow:number, newBorrow:any): Observable<Own>{
-    let url = `${baseURL}/${idBorrow}`;
-    return this.http.put(url,newBorrow);
+
+  saveOwn(idOwn:number, dataOwn:any): Observable<Own>{
+    let url = `${baseURL}/${idOwn}`;
+    return this.http.put(url,dataOwn);
   }
+
   create(data:any):Observable<any>{
     console.log("URL"+baseURL);
     console.log('DATA:');
