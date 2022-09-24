@@ -59,7 +59,6 @@ export class BorrowsListComponent implements OnInit {
 //tabla borrowed
     setTimeout(() => {
       // console.log('antesIf   '+JSON.stringify(this.newBorrowgame))
-
       if (this.newBorrowgame.pending) {
         this.newBorrowgame.pending=false
       } else {
@@ -94,7 +93,8 @@ this.gameServ.get(id)
   },
   error => {
     this.error = error;
-    console.log('error'+error);
+    console.log('error: '+JSON.stringify(error));
+    console.log('game error:        '+ JSON.stringify(this.game));
   }
 )
 

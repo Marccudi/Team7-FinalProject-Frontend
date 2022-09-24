@@ -11,12 +11,12 @@
     <div class="row">
         <div class="col row-input">
             <label for="user">Usuario</label>
-            <input class="w-100 form-control" id="user" type="text" value="{{user?.username}}"
+            <input class="w-100 form-control" id="user" type="text" value={{user.username}}
     [(ngModel)]="form.username" required #username="ngModel">
         </div>
         <div class="col row-input">
             <label for="email">Correo electrónico</label>
-            <input class="w-100 form-control-plaintext" id="email" type="email" value="{{user?.email}}" readonly>
+            <input class="w-100 form-control-plaintext" id="email" type="email" value={{user.email}} readonly>
         </div>
     </div>
     <div class="row">
@@ -34,12 +34,12 @@
     <div class="row">
         <div class="col row-input">
             <label for="name">Nombre</label>
-            <input class="w-100 form-control" id="name" type="text" value="{{user?.first_name}}"
+            <input class="w-100 form-control" id="name" type="text" value={{user.first_name}}
     [(ngModel)]="form.firstName" required #firstName="ngModel">
         </div>
         <div class="col row-input">
           <label for="name">Apellido</label>
-          <input class="w-100 form-control" id="surname" type="text" value="{{user?.last_name}}"
+          <input class="w-100 form-control" id="surname" type="text" value={{user.last_name}}
     [(ngModel)]="form.lastName" required #lastName="ngModel">
       </div>
     </div>
