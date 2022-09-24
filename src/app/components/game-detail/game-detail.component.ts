@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameHaveGenreService } from '../../service/game-have-genre.service';
 import { Game } from '../../models/game';
@@ -7,6 +7,8 @@ import { GameHaveGenre } from '../../models/game-have-genre';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
 import { Borrow } from "../../models/borrow";
 import { BorrowsService } from 'src/app/service/borrows.service';
+import { OwnsService } from 'src/app/service/owns.service';
+import { Own } from 'src/app/models/own';
 
 @Component({
   selector: 'app-game-detail',
@@ -14,6 +16,7 @@ import { BorrowsService } from 'src/app/service/borrows.service';
   styleUrls: ['./game-detail.component.css']
 })
 export class GameDetailComponent implements OnInit {
+  [x: string]: any;
 
   currentGame: Game = {
     id: '',
@@ -39,6 +42,25 @@ export class GameDetailComponent implements OnInit {
   activeGame:any;
   submitted:any;
 
+  userGames:any;
+
+  userGamesSelected: Game = {
+    id: '',
+    title: '',
+    image:'',
+    duration: '',
+    yearReleased: '',
+    ageCalification: '',
+    description: '',
+    dateInserted: '',
+    enabled: '',
+    borrowed: '',
+    developer: '',
+    platform: '',
+    owner:''
+  };
+
+  botonConfirmarOwn = false;
   botonConfirmar=false;
 
   prestamoModalTxt= '¿Estás seguro de pedir este juego en préstamo?';
@@ -48,7 +70,8 @@ export class GameDetailComponent implements OnInit {
               private gameService: GameService,
               private router: Router,
               private gameHaveGenreService: GameHaveGenreService,
-              private borrowService: BorrowsService) { }
+              private borrowService: BorrowsService,
+              private ownsService :OwnsService) { }
 
   ngOnInit(): void {
     this.message='';
@@ -112,7 +135,6 @@ export class GameDetailComponent implements OnInit {
   }
 
   crearPeticionPrestamo(){
-
     const borrow: Borrow = {
       game: this.activeGame,
       userOwner: this.activeGame.owner,
@@ -122,7 +144,6 @@ export class GameDetailComponent implements OnInit {
       pending: true
     }
 
-    console.log(JSON.stringify(borrow));
     this.borrowService.create(borrow)
     .subscribe(
       response => {
@@ -135,6 +156,48 @@ export class GameDetailComponent implements OnInit {
 
     this.botonConfirmar=true;
     this.prestamoModalTxt='Has realizado la petición de prestamo correctamente';
+  }
+
+  getGamesFromUser(){
+    this.gameService.getUserGames(this.tokenStorage.getUser().id+'')
+    .subscribe(
+      result => {
+        this.userGames = result;
+        console.log(result);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  cardSelected(userGame:any){
+    this.userGamesSelected= userGame;
+    this.botonConfirmarOwn=true;
+  }
+
+  createExchange(){
+    if (this.userGamesSelected.id != '') {
+      const own: Own = {
+        gameOldOwner: this.currentGame,
+        gameNewOwner: this.userGamesSelected,
+        userOldOwner: this.currentGame.owner,
+        userNewOwner: this.tokenStorage.getUser(),
+        exchange_date: new Date().toISOString().slice(0, 10),
+        pending: true
+      }
+      console.log(JSON.stringify(own));
+
+      this.ownsService.create(own)
+      .subscribe(
+        response => {
+          console.log(response);
+          this.submitted= true;
+        },
+        error => {
+          console.log(error);
+      });
+    }
   }
 
 }
