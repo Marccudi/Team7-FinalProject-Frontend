@@ -79,7 +79,7 @@ export class AddGameComponent implements OnInit {
 
     const gameId = this.activatedRoute.snapshot.paramMap.get("id");
     if(gameId != null) {                          //Initialize form data if url has id
-      this.title = "Actualizar juego";               
+      this.title = "Actualizar juego";
       this.gameService.get(gameId).subscribe(
         data => {
           console.log(data);
