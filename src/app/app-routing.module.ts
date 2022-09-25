@@ -11,9 +11,13 @@ import { LoginComponent } from './components/login/login.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginActivateGuard } from './security/login-activate.guard';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { TermsComponent } from './components/terms/terms.component';
 
 const routes: Routes = [
   { path: 'inicio', component: GameListComponent },
+  { path: 'aboutUs', component: AboutUsComponent },
+  { path: 'terms', component: TermsComponent },
   { path: 'inicio/:search', component: GameListComponent },
   { path: 'mis-juegos', component: MyGamesComponent},
   //, canActivate:[LoginActivateGuard]

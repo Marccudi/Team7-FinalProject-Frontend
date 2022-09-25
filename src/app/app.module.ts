@@ -20,6 +20,8 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { SideNavBarComponent } from './components/side-nav-bar/side-nav-bar.component';
 
 import { AuthInterceptorProviders } from './_helpers/auth.interceptor';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { TermsComponent } from './components/terms/terms.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { AuthInterceptorProviders } from './_helpers/auth.interceptor';
     ForgotPasswordComponent,
     SideNavComponent,
     SideNavBarComponent,
+    AboutUsComponent,
+    TermsComponent,
   ],
   imports: [
     BrowserModule,
