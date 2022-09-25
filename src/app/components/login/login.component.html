@@ -7,8 +7,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit minus accusamus, dolor
-                    praesentium.</p>
+                <p>No hay nada mejor que intercambiar experiencias de un videojuego para fortalecer vínculos entre personas</p>
             </div>
         </div>
          <form (ngSubmit)="onSubmit()" name="form" novalidate>
@@ -35,6 +34,9 @@
             </div>
             <div class="alert alert-success" *ngIf="isLoggedIn">
               Te has logueado correctamente
+            </div>
+            <div class="alert alert-danger" *ngIf="isLoginFailed">
+              Usuario o contraseña erroneos
             </div>
         </div>
       </form>
