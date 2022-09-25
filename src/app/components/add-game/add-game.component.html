@@ -33,7 +33,7 @@
               </div>
               </div>
               <div class="mb-3 col">
-                  <label for="developerInput" class="form-label">Desarollador: </label>
+                  <label for="developerInput" class="form-label">Desarrollador: </label>
                   <div class="row">
                       <div class="col">
                           <input type="text" class="form-control" id="developerInput" value="a" required="required" [(ngModel)]="developerModel.name" readonly name="developer">
@@ -77,7 +77,7 @@
             </div>
         </div>
           <div class="row pt-2">
-              <button (click)="saveGame()" type="submit" class="btn btn-primary">Submit</button>
+              <button (click)="saveGame()" type="submit" class="btn btn-primary">Crear</button>
               <div class="alert alert-success mt-2" *ngIf="submitted">
                 Juego insertado correctamente.
               </div>
@@ -92,7 +92,7 @@
           <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="generoModalLabel">Generos </h5>
+                <h5 class="modal-title" id="generoModalLabel">Géneros </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <form (ngSubmit)="onSubmitGenres()" #form="ngForm">
@@ -106,8 +106,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Save</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</button>
                 </div>
               </form>
             </div>
@@ -133,7 +133,7 @@
                   </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
               </div>
             </div>
           </div>

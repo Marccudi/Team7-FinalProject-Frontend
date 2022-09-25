@@ -13,7 +13,7 @@
   <div class="container-fluid">
       <div class="row">
           <div class="col ps-5 col-6">
-              <h3>Mis prestamos</h3>
+              <h3>Mis Préstamos</h3>
           </div>
           <div class="col">
               <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
@@ -21,7 +21,7 @@
           </div>
           <div class="col">
               <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
-                  data-bs-target="#modalPrest">Solicitudes de prestamo</button>
+                  data-bs-target="#modalPrest">Solicitudes de préstamo</button>
           </div>
       </div>
       <!-- Modal Intercambio -->
@@ -30,7 +30,7 @@
           <div class="modal-dialog">
               <div class="modal-content" *ngIf="exchangePetitions != null else NoPendingExchangesGames">
                   <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Intercambios</h5>
+                      <h5 class="modal-title" id="exampleModalLabel"> Solicitudes de Intercambio</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
@@ -60,7 +60,7 @@
               <ng-template #NoPendingExchangesGames>
                 <div class="modal-content">
                   <div class="modal-header" >
-                    <h5 class="modal-title" id="exampleModalLabel">Intercambios</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Solicitudes de Intercambio</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
@@ -79,7 +79,7 @@
           <div class="modal-dialog" >
               <div class="modal-content" *ngIf="borrowedGames != null && !borrowedGames.pending; else NoPendingGames">
                   <div class="modal-header" >
-                      <h5 class="modal-title" id="exampleModalLabel">Solicitudes de Prestamos</h5>
+                      <h5 class="modal-title" id="exampleModalLabel">Solicitudes de Préstamos</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" >
@@ -109,18 +109,18 @@
                     </span>
                   </div>
                   <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                   </div>
               </div>
 
               <ng-template #NoPendingGames>
                 <div class="modal-content">
                   <div class="modal-header" >
-                    <h5 class="modal-title" id="exampleModalLabel">Prestamos</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Préstamos</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    No tienes juegos pendientes de prestamo
+                    No tienes juegos pendientes de préstamo
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -148,8 +148,8 @@
                               <p class="card-text">Consola: {{borrow.game.platform.name}}</p>
                               <p class="card-text">Prestado a: {{borrow.userBorrower.username}}</p>
                               <hr>
-                              <p class="card-text"><small class="text-muted pe-5">fecha inicio prestamo:
-                                {{borrow.lend_date | date: 'dd/MM/yyyy'}}</small> <small class="text-muted ps-5">fecha final del prestamo:
+                              <p class="card-text"><small class="text-muted pe-5">Fecha inicio préstamo:
+                                {{borrow.lend_date | date: 'dd/MM/yyyy'}}</small> <small class="text-muted ps-5">Fecha final del préstamo:
                                   {{borrow.return_date | date: 'dd/MM/yyyy'}}</small></p>
                           </div>
                       </div>
@@ -169,8 +169,8 @@
                             <p class="card-text">Consola: {{borrow.game.platform.name}}</p>
                             <p class="card-text">Prestado a: {{borrow.userBorrower.username}}</p>
                             <hr>
-                            <p class="card-text"><small class="text-muted pe-5">fecha inicio prestamo:
-                              {{borrow.lend_date | date: 'dd/MM/yyyy'}}</small> <small class="text-muted ps-5">fecha final del prestamo:
+                            <p class="card-text"><small class="text-muted pe-5">Fecha inicio préstamo:
+                              {{borrow.lend_date | date: 'dd/MM/yyyy'}}</small> <small class="text-muted ps-5">Fecha final del préstamo:
                                 {{borrow.return_date | date: 'dd/MM/yyyy'}}</small></p>
                         </div>
                     </div>
@@ -183,7 +183,7 @@
     <ng-template #espera>Esperando datos</ng-template>
 
     <div class="col ps-5 col-6">
-      <h3>Prestamos pedidos</h3>
+      <h3>Préstamos pedidos</h3>
     </div>
 
     <div class="row" *ngIf="orderedGames != null && !orderedGames.pending; else espera">
@@ -201,8 +201,8 @@
                           <p class="card-text">Consola: {{ordered.game.platform.name}}</p>
                           <p class="card-text">Dueño: {{ordered.userOwner.username}}</p>
                           <hr>
-                          <p class="card-text"><small class="text-muted">fecha inicio prestamo:
-                            {{ordered.lend_date | date: 'dd/MM/yyyy'}}</small> <br><small class="text-muted">fecha final del prestamo:
+                          <p class="card-text"><small class="text-muted">Fecha inicio préstamo:
+                            {{ordered.lend_date | date: 'dd/MM/yyyy'}}</small> <br><small class="text-muted">Fecha final del préstamo:
                               {{ordered.return_date | date: 'dd/MM/yyyy'}}</small></p>
                       </div>
                   </div>
@@ -222,8 +222,8 @@
                           <p class="card-text">Consola: {{ordered.game.platform.name}}</p>
                           <p class="card-text">Dueño: {{ordered.userOwner.username}}</p>
                           <hr>
-                          <p class="card-text"><small class="text-muted"> fecha inicio prestamo:
-                            {{ordered.lend_date | date: 'dd/MM/yyyy'}}</small> <br><small class="text-muted">fecha final del prestamo:
+                          <p class="card-text"><small class="text-muted"> Fecha inicio préstamo:
+                            {{ordered.lend_date | date: 'dd/MM/yyyy'}}</small> <br><small class="text-muted">Fecha final del préstamo:
                               {{ordered.return_date | date: 'dd/MM/yyyy'}}</small></p>
                       </div>
                   </div>
