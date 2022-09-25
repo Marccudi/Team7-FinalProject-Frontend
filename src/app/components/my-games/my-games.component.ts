@@ -19,7 +19,10 @@ export class MyGamesComponent implements OnInit {
   gameGenres: string[] = [];
   gamePlatforms: string[] = [];
 
-  constructor(private router: Router, private gameService: GameService, private route :ActivatedRoute, private tokenStorage: TokenStorageService, private gameHaveGenreService: GameHaveGenreService) { }
+  constructor(private router: Router, private gameService: GameService, private route :ActivatedRoute, private tokenStorage: TokenStorageService, private gameHaveGenreService: GameHaveGenreService) { 
+    // force route reload whenever params change;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
 
   ngOnInit(): void {
     this.getGamesFromUser();
@@ -32,9 +35,7 @@ export class MyGamesComponent implements OnInit {
         this.games = result;
         console.log(result);
         
-        this.saveGameDevelopers();
-        this.saveGameGenres();
-        this.saveGamePlatforms();
+        this.filterGames();
       },
       error => {
         this.error = error;
@@ -68,18 +69,18 @@ export class MyGamesComponent implements OnInit {
   saveGamePlatforms() {
     for (let index = 0; index < this.games.length; index++) {
       const game = this.games[index];
-      if (this.games.indexOf(game.platform.name) == -1) {
-        this.gamePlatforms.push(game.platform.name);
-      }
+        if(!this.gamePlatforms.includes(game.platform.name)){
+          this.gamePlatforms.push(game.platform.name);
+        }
     }
   }
 
   saveGameDevelopers() {
     for (let index = 0; index < this.games.length; index++) {
       const game = this.games[index];
-      if (this.games.indexOf(game.developer.name) == -1) {
-        this.gameDevelopers.push(game.developer.name);
-      }
+        if(!this.gameDevelopers.includes(game.developer.name)) {
+          this.gameDevelopers.push(game.developer.name);
+        }
     }
   }
 
@@ -95,6 +96,71 @@ export class MyGamesComponent implements OnInit {
         }
       });
     }
+  }
+
+  filterGames() {
+    let genreFilter = "";
+    let developerFilter = "";
+    let platformFilter = "";
+    this.route.queryParams.subscribe(params => {
+      genreFilter = params["genre"];
+      developerFilter = params["developer"];
+      platformFilter = params["platform"];
+
+      if (genreFilter != null) {
+        this.filterGenres(genreFilter);
+      }
+      if(platformFilter != null){
+        this.filterPlatforms(platformFilter);
+      }
+      if (developerFilter != null) {
+        this.filterDevelopers(developerFilter);
+      }
+
+      setTimeout(() => {            //Wait until games have loaded
+        this.saveGameDevelopers();
+        this.saveGameGenres();
+        this.saveGamePlatforms();
+      }, 500);
+    })
+  }
+
+  filterGenres(genreFilter: string) {
+    let newGames: any = [];
+    for (let index = 0; index < this.games.length; index++) {           //find all games that contain the search string
+      const game = this.games[index];
+      this.gameHaveGenreService.getGenresXGame(game.id).subscribe(data => {
+        for (let index = 0; index < data.length; index++) {
+          const gameHaveGenre = data[index];
+          if (gameHaveGenre.genre.name.indexOf(genreFilter) > -1) {
+            newGames.push(game);
+          }
+        }
+      });
+    }
+    this.games = newGames;
+  }
+
+  filterPlatforms(platformFilter: string) {
+    let newGames: any = [];
+    for (let index = 0; index < this.games.length; index++) {           //find all games that contain the search string
+      const game = this.games[index];
+      if (game.platform.name.lastIndexOf(platformFilter) > -1) {
+        newGames.push(game);
+      }
+    }
+    this.games = newGames;
+  }
+
+  filterDevelopers(developerFilter: string) {
+    let newGames: any = [];
+    for (let index = 0; index < this.games.length; index++) {           //find all games that contain the search string
+      const game = this.games[index];
+      if (game.developer.name.lastIndexOf(developerFilter) > -1) {
+        newGames.push(game);
+      }
+    }
+    this.games = newGames;
   }
 
 }

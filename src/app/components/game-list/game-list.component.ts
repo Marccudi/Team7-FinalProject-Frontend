@@ -74,10 +74,6 @@ export class GameListComponent implements OnInit {
         this.saveGameGenres();
         this.saveGamePlatforms();
       }, 500);
-      
-
-      console.log("gameDeveloper ->");
-      console.log(this.gameDevelopers);
     })
   }
 
@@ -95,18 +91,18 @@ export class GameListComponent implements OnInit {
   saveGamePlatforms() {
     for (let index = 0; index < this.games.length; index++) {
       const game = this.games[index];
-      if (this.games.indexOf(game.platform.name) == -1) {
-        this.gamePlatforms.push(game.platform.name);
-      }
+        if(!this.gamePlatforms.includes(game.platform.name)){
+          this.gamePlatforms.push(game.platform.name);
+        }
     }
   }
 
   saveGameDevelopers() {
     for (let index = 0; index < this.games.length; index++) {
       const game = this.games[index];
-      if (this.games.indexOf(game.developer.name) == -1) {
-        this.gameDevelopers.push(game.developer.name);
-      }
+        if(!this.gameDevelopers.includes(game.developer.name)) {
+          this.gameDevelopers.push(game.developer.name);
+        }
     }
   }
 
