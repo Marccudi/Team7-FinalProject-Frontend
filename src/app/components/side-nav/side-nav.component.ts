@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-side-nav',
@@ -12,17 +12,29 @@ export class SideNavComponent implements OnInit {
   @Input() genres = [""];
   @Input() platforms = [""];
 
-  constructor(private route :ActivatedRoute ) { }
+  prevSelGenre = "";
+  prevSelPlatform = "";
+  prevSelDeveloper = "";
+
+  url: any;
+
+  constructor(private route :ActivatedRoute, private router: Router ) { }
 
   ngOnInit(): void {
-    let url = this.route.snapshot.url.toString();
-    if (url=="inicio") {
+    this.url = this.route.snapshot.url.toString();
+    if (this.url=="inicio") {
       console.log("Som al inicio");
-    }else if (url=="mis-juegos"){
+    }else if (this.url=="mis-juegos"){
       console.log("Som a mis-juegos");
-    }else if (url=="mis-prestamos") {
+    }else if (this.url=="mis-prestamos") {
       console.log("Som a mis-prestamos");
     }
+
+    this.route.queryParams.subscribe(params => {
+      this.prevSelGenre = params["genre"];
+      this.prevSelPlatform = params["platform"];
+      this.prevSelDeveloper = params["developer"];
+    });
 
   }
 
@@ -33,6 +45,18 @@ export class SideNavComponent implements OnInit {
     mySidenav.setAttribute( "style", "padding:0vh; width:0px;");
     body.setAttribute( "style", "margin-left:0px;");
     subBar.setAttribute( "style", "margin-left:0px;");
+  }
+
+  onChangeGenre(genre:any, event :any) {
+      this.router.navigate([this.url], { queryParams: {genre: genre}, queryParamsHandling: "merge" });
+  }
+
+  onChangeDeveloper(developer:any, event :any) {
+      this.router.navigate([this.url], { queryParams: {developer: developer}, queryParamsHandling: "merge" });
+  }
+
+  onChangePlatform(platform:any, event :any) {
+      this.router.navigate([this.url], { queryParams: {platform: platform}, queryParamsHandling: "merge" });
   }
 
 }

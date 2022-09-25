@@ -12,13 +12,13 @@
           <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
               <div class="accordion-body">
                   <div class="form-check">
-                      <input class="form-check-input" type="radio" name="genres-radio" id="flexRadioDefault1" checked>
+                      <input class="form-check-input" type="radio" name="genres-radio" id="flexRadioDefault1" (change)="onChangeGenre(null, $event.target)" [checked]="prevSelGenre == null">
                       <label class="form-check-label" for="flexRadioDefault1">
                           Todos
                       </label>
                   </div>
                   <div *ngFor="let genre of genres">
-                      <input class="form-check-input" type="radio" name="{{genre}}" id="{{genre}}">
+                      <input class="form-check-input" type="radio" name="{{genre}}" id="{{genre}}" (change)="onChangeGenre(genre, $event.target)" [checked]="prevSelGenre == genre">
                       <label class="form-check-label" for="{{genre}}">
                           {{genre}}
                       </label>
@@ -35,13 +35,13 @@
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
               <div class="accordion-body">
                   <div class="form-check">
-                      <input class="form-check-input" type="radio" name="platforms-radio" id="flexRadioDefault1" checked>
+                      <input class="form-check-input" type="radio" name="platforms-radio" id="flexRadioDefault1" (change)="onChangePlatform(null, $event.target)" [checked]="prevSelPlatform == null">
                       <label class="form-check-label" for="flexRadioDefault1">
                           Todos
                       </label>
                   </div>
                   <div *ngFor="let platform of platforms">
-                      <input class="form-check-input" type="radio" name="{{platform}}" id="{{platform}}">
+                      <input class="form-check-input" type="radio" name="{{platform}}" id="{{platform}}" (change)="onChangePlatform(platform, $event.target)" [checked]="prevSelPlatform == platform">
                       <label class="form-check-label" for="{{platform}}">
                           {{platform}}
                       </label>
@@ -58,13 +58,13 @@
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
               <div class="accordion-body">
                   <div class="form-check">
-                      <input class="form-check-input" type="radio" name="developers-radio" id="flexRadioDefault1" checked>
+                      <input class="form-check-input" type="radio" name="developers-radio" id="flexRadioDefault1" (change)="onChangeDeveloper(null, $event.target)" [checked]="prevSelDeveloper == null">
                       <label class="form-check-label" for="flexRadioDefault1">
                           Todos
                       </label>
                   </div>
                   <div *ngFor="let developer of developers">
-                      <input class="form-check-input" type="radio" name="{{developer}}" id="{{developer}}">
+                      <input class="form-check-input" type="radio" name="{{developer}}" id="{{developer}}" (change)="onChangeDeveloper(developer, $event.target)" [checked]="prevSelDeveloper == developer">
                       <label class="form-check-label" for="{{developer}}">
                           {{developer}}
                       </label>

@@ -37,6 +37,6 @@ export class HeaderComponent implements OnInit {
   }
 
   search(searchText: string): void {
-    this.router.navigate(['/inicio'], { queryParams: {search: searchText} });
+    this.router.navigate(['/inicio'], { queryParams: {search: searchText}, queryParamsHandling: "merge" });
   }
 }

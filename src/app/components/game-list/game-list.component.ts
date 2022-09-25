@@ -15,7 +15,7 @@ export class GameListComponent implements OnInit {
 
   games: any;
   error: string = '';
-  
+
   gameDevelopers: string[] = [];  //Data to pass to the side bar
   gameGenres: string[] = [];
   gamePlatforms: string[] = [];
@@ -47,28 +47,49 @@ export class GameListComponent implements OnInit {
 
   filterGames() {
     let searchString = "";
+    let genreFilter = "";
+    let developerFilter = "";
+    let platformFilter = "";
     this.route.queryParams.subscribe(params => {
       searchString = params["search"];
+      genreFilter = params["genre"];
+      developerFilter = params["developer"];
+      platformFilter = params["platform"];
+
       if (searchString != null) {                                           //enter if url has search param
         this.searchGames(searchString);
       }
-      this.saveGameDevelopers();
-      this.saveGameGenres();
-      this.saveGamePlatforms();
+      if (genreFilter != null) {
+        this.filterGenres(genreFilter);
+      }
+      if(platformFilter != null){
+        this.filterPlatforms(platformFilter);
+      }
+      if (developerFilter != null) {
+        this.filterDevelopers(developerFilter);
+      }
+
+      setTimeout(() => {            //Wait until games have loaded
+        this.saveGameDevelopers();
+        this.saveGameGenres();
+        this.saveGamePlatforms();
+      }, 500);
+      
+
+      console.log("gameDeveloper ->");
+      console.log(this.gameDevelopers);
     })
   }
 
   searchGames(searchString: string) {
-    if (searchString != null) {                                           //enter if url has search param
-      let newGames: any = [];
-      for (let index = 0; index < this.games.length; index++) {           //find all games that contain the search string
-        const game = this.games[index];
-        if (game.title.toLowerCase().lastIndexOf(searchString.toLowerCase()) > -1) {
-          newGames.push(game);
-        }
+    let newGames: any = [];
+    for (let index = 0; index < this.games.length; index++) {           //find all games that contain the search string
+      const game = this.games[index];
+      if (game.title.toLowerCase().lastIndexOf(searchString.toLowerCase()) > -1) {
+        newGames.push(game);
       }
-      this.games = newGames;
     }
+    this.games = newGames;
   }
 
   saveGamePlatforms() {
@@ -101,5 +122,43 @@ export class GameListComponent implements OnInit {
         }
       });
     }
+  }
+
+  filterGenres(genreFilter: string) {
+    let newGames: any = [];
+    for (let index = 0; index < this.games.length; index++) {           //find all games that contain the search string
+      const game = this.games[index];
+      this.gameHaveGenreService.getGenresXGame(game.id).subscribe(data => {
+        for (let index = 0; index < data.length; index++) {
+          const gameHaveGenre = data[index];
+          if (gameHaveGenre.genre.name.indexOf(genreFilter) > -1) {
+            newGames.push(game);
+          }
+        }
+      });
+    }
+    this.games = newGames;
+  }
+
+  filterPlatforms(platformFilter: string) {
+    let newGames: any = [];
+    for (let index = 0; index < this.games.length; index++) {           //find all games that contain the search string
+      const game = this.games[index];
+      if (game.platform.name.lastIndexOf(platformFilter) > -1) {
+        newGames.push(game);
+      }
+    }
+    this.games = newGames;
+  }
+
+  filterDevelopers(developerFilter: string) {
+    let newGames: any = [];
+    for (let index = 0; index < this.games.length; index++) {           //find all games that contain the search string
+      const game = this.games[index];
+      if (game.developer.name.lastIndexOf(developerFilter) > -1) {
+        newGames.push(game);
+      }
+    }
+    this.games = newGames;
   }
 }
