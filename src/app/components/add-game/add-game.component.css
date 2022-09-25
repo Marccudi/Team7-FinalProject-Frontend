@@ -1,0 +1,30 @@
+.body{
+  margin-top: 100px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.game-form .btn{
+  background-color: var(--colorS);
+  border: 2px solid var(--colorS2);
+}
+
+.game-form .btn:hover{
+  background-color: var(--colorS2) !important;
+  border: 2px solid var(--colorS) !important;
+  color: white !important;
+}
+
+.game-form .back{
+  background-color: white;
+  border: 1px solid white;
+  color:  black;
+  transition: 0.5s;
+}
+
+.game-form .back:hover{
+  border: 2px solid var(--colorS2);
+  color: var(--colorS2);
+  border-radius: 50%;
+  transition: 0.5s;
+}

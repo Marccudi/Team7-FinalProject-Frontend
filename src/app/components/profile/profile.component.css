@@ -1,0 +1,34 @@
+.body{
+  margin-top: 150px;
+  margin-bottom: 100px;
+}
+
+
+.btn{
+    background-color: var(--colorS);
+    color: white;
+    border: 2px solid var(--colorS2);
+    margin-right: 10px;
+}
+
+.perfil{
+  width: 200px;
+  border-radius: 50%;
+}
+
+h3{
+  margin-top: 150px;
+}
+
+.btn-save {
+    width: 200px;
+}
+
+.row-input {
+
+    padding: 20px;
+}
+
+.container-perfil {
+    max-width: 1000px;
+}

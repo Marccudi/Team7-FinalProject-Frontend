@@ -1,0 +1,33 @@
+.header{
+  background-color: var(--colorP);
+  border-bottom: 4px solid var(--colorS);
+  height: 100px;
+}
+
+.nav-link{
+  margin-right: 10px;
+  display: inline-block;
+  position: relative;
+}
+
+.nav-link:after{
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 4px;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  transform-origin: bottom right;
+  transition: transform 0.5s ease-out;
+}
+
+.nav-link:hover:after{
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.logo{
+  max-width: 90px;
+}

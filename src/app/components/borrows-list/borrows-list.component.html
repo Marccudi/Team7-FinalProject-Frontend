@@ -1,0 +1,236 @@
+<app-header></app-header>
+<!-- ############################################################ -->
+
+<!-- Pagina principal -->
+<!-- No deverian ser necesarios los br -->
+<div id="body" class="body">
+  <app-side-nav [developers]="gameDevelopers" [platforms]="gamePlatforms" [genres]="gameGenres"></app-side-nav>
+  <!-- ############################## Prestamos ############################## -->
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col ps-5 col-6">
+              <h3>Mis Préstamos</h3>
+          </div>
+          <div class="col">
+              <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
+                  data-bs-target="#modalInt" (click)="getAllExchangePetitions()">Solicitudes de intercambio</button>
+          </div>
+          <div class="col">
+              <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal"
+                  data-bs-target="#modalPrest">Solicitudes de préstamo</button>
+          </div>
+      </div>
+      <!-- Modal Intercambio -->
+      <div class="modal modal-xl fade" id="modalInt" tabindex="-1" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content" *ngIf="exchangePetitions != null else NoPendingExchangesGames">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel"> Solicitudes de Intercambio</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      <div style="border-bottom: solid 1px;" class="ms-0" *ngFor="let exchangePetition of exchangePetitions">
+                          <div class="row pb-2">
+                              <div class="col">
+                                Usuario: {{exchangePetition.userNewOwner.username}}
+                              </div>
+                              <div class="col">
+                                Tu juego: {{exchangePetition.gameOldOwner.title}}
+                              </div>
+                              <div class="col">
+                                Su juego: {{exchangePetition.gameNewOwner.title}}
+                              </div>
+                              <div class="col">
+                                  <button type="button" class="btn btn-outline-dark" (click)="saveOwn(exchangePetition.id, exchangePetition)">OK</button>
+                                  <button type="button" class="btn btn-outline-dark" (click)="deleteOwn(exchangePetition.id)">X</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  </div>
+              </div>
+
+              <ng-template #NoPendingExchangesGames>
+                <div class="modal-content">
+                  <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Solicitudes de Intercambio</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    No tienes juegos pendientes de Intercambio
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </ng-template>
+          </div>
+      </div>
+      <!-- Modal Prestamos -->
+      <div class="modal modal-xl fade" id="modalPrest" tabindex="-1" aria-labelledby="exampleModalLabel"
+          aria-hidden="true" >
+          <div class="modal-dialog" >
+              <div class="modal-content" *ngIf="borrowedGames != null && !borrowedGames.pending; else NoPendingGames">
+                  <div class="modal-header" >
+                      <h5 class="modal-title" id="exampleModalLabel">Solicitudes de Préstamos</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" >
+                    <span *ngFor="let borrow of borrowedGames">
+                      <div style="border-bottom: solid 1px;" class="ms-0 pt-3" *ngIf="borrow.pending">
+                        <form name="form" novalidate>
+                          <div class="row pb-2" >
+                            <div class="col">
+                              {{borrow.userBorrower.username}}
+                            </div>
+                            <div class="col">
+                                {{borrow.game.title}}
+                            </div>
+                            <div class="col">
+                              {{borrow.game.platform.name}}
+                            </div>
+                            <div class="col">
+                              <input type="date" #dateInput min="{{date}}" value="{{date}}" style="width: 60%;">
+                            </div>
+                            <div class="col">
+                              <button type="button" (click)="saveBorrow(borrow.id, dateInput.value)" class="btn btn-outline-dark">OK</button>
+                              <button type="button" (click)="delBorrow(borrow.id)" class="btn btn-outline-dark ms-1">X</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </span>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  </div>
+              </div>
+
+              <ng-template #NoPendingGames>
+                <div class="modal-content">
+                  <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Préstamos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    No tienes juegos pendientes de préstamo
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </ng-template>
+
+          </div>
+      </div>
+
+
+      <!-- Pagina principal -->
+      <div class="row" *ngIf="borrowedGames != null && !borrowedGames.pending; else espera">
+          <div class="col" *ngFor="let borrow of borrowedGames">
+            <!-- mis prestamos a tiempo -->
+            <span *ngIf="borrow.return_date > date;else deuda">
+              <div class="card mb-3 m-3">
+                  <div class="row g-0">
+                      <div class="col-md-4 text-center">
+                          <img src={{borrow.game.image}} class="img-fluid rounded" style="max-height: 200px;" alt={{borrow.game.title}}>
+                      </div>
+                      <div class="col-md-8">
+                          <div class="card-body">
+                              <h5 class="card-title">{{borrow.game.title}}</h5>
+                              <p class="card-text">Consola: {{borrow.game.platform.name}}</p>
+                              <p class="card-text">Prestado a: {{borrow.userBorrower.username}}</p>
+                              <hr>
+                              <p class="card-text"><small class="text-muted pe-5">Fecha inicio préstamo:
+                                {{borrow.lend_date | date: 'dd/MM/yyyy'}}</small> <small class="text-muted ps-5">Fecha final del préstamo:
+                                  {{borrow.return_date | date: 'dd/MM/yyyy'}}</small></p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </span>
+            <!-- Mis prestamos tarde -->
+            <ng-template #deuda>
+              <div class="card text-bg-warning mb-3 m-3">
+                <div class="row g-0">
+                    <div class="col-md-4 text-center">
+                        <img src={{borrow.game.image}} class="img-fluid rounded" style="max-height: 200px;" alt={{borrow.game.title}}>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{borrow.game.title}}</h5>
+                            <p class="card-text">Consola: {{borrow.game.platform.name}}</p>
+                            <p class="card-text">Prestado a: {{borrow.userBorrower.username}}</p>
+                            <hr>
+                            <p class="card-text"><small class="text-muted pe-5">Fecha inicio préstamo:
+                              {{borrow.lend_date | date: 'dd/MM/yyyy'}}</small> <small class="text-muted ps-5">Fecha final del préstamo:
+                                {{borrow.return_date | date: 'dd/MM/yyyy'}}</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </ng-template>
+          </div>
+      </div>
+    </div>
+    <ng-template #espera>Esperando datos</ng-template>
+
+    <div class="col ps-5 col-6">
+      <h3>Préstamos pedidos</h3>
+    </div>
+
+    <div class="row" *ngIf="orderedGames != null && !orderedGames.pending; else espera">
+      <div class="col" *ngFor="let ordered of orderedGames">
+        <!-- Prestamos pedidos con tiempo -->
+          <span *ngIf="ordered.return_date>date; else tarde">
+            <div class="card mb-3 m-3">
+              <div class="row g-0">
+                  <div class="col-md-4 text-center">
+                      <img src={{ordered.game.image}} class="img-fluid rounded" style="max-height: 200px;" alt={{ordered.game.title}}>
+                  </div>
+                  <div class="col-md-8">
+                      <div class="card-body">
+                          <h5 class="card-title">{{ordered.game.title}}</h5>
+                          <p class="card-text">Consola: {{ordered.game.platform.name}}</p>
+                          <p class="card-text">Dueño: {{ordered.userOwner.username}}</p>
+                          <hr>
+                          <p class="card-text"><small class="text-muted">Fecha inicio préstamo:
+                            {{ordered.lend_date | date: 'dd/MM/yyyy'}}</small> <br><small class="text-muted">Fecha final del préstamo:
+                              {{ordered.return_date | date: 'dd/MM/yyyy'}}</small></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          </span>
+            <!-- Prestamos pedidos tarde -->
+          <ng-template #tarde>
+            <div class="card text-bg-warning mb-3 m-3">
+              <div class="row g-0">
+                  <div class="col-md-4 text-center">
+                      <img src={{ordered.game.image}} class="img-fluid rounded" style="max-height: 200px;" alt={{ordered.game.title}}>
+                  </div>
+                  <div class="col-md-8">
+                      <div class="card-body">
+                          <h5 class="card-title">{{ordered.game.title}}</h5>
+                          <p class="card-text">Consola: {{ordered.game.platform.name}}</p>
+                          <p class="card-text">Dueño: {{ordered.userOwner.username}}</p>
+                          <hr>
+                          <p class="card-text"><small class="text-muted"> Fecha inicio préstamo:
+                            {{ordered.lend_date | date: 'dd/MM/yyyy'}}</small> <br><small class="text-muted">Fecha final del préstamo:
+                              {{ordered.return_date | date: 'dd/MM/yyyy'}}</small></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          </ng-template>
+      </div>
+
+
+
+
+  </div>
+  </div>
+<app-footer></app-footer>

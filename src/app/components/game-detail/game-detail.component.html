@@ -1,0 +1,128 @@
+<app-header></app-header>
+<div class="body p-5 container-fluid" >
+  <div class="row row-cols-sm-1 row-cols-lg-2">
+      <div class="col text-center portada">
+          <img src={{currentGame.image}} alt={{currentGame.title}} class="img-fluid">
+      </div>
+      <div class="col game-info">
+          <div class="row">
+              <div class="col title">
+                  <h1>{{currentGame.title}}</h1>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col">
+                  <h5>Consola: {{currentGame.platform.name}}</h5>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col">
+                  <h5>Géneros: <span *ngFor="let genre of genres">{{genre.genre.name}} </span> </h5>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col">
+                  <h5>Desarrollador:{{currentGame.developer.name}}</h5>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col">
+                  <h5>Duración  del juego: {{currentGame.duration}}</h5>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col">
+                  <h5>Año de salida: {{currentGame.yearReleased}}</h5>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col">
+                  <img src={{pegiImage(currentGame.ageCalification)}} alt={{currentGame.title}} class="img-fluid pegi">
+              </div>
+          </div>
+          <div class="row">
+              <div class="col" *ngIf="owns == false; else propietario">
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#intercambioModal" (click)="getGamesFromUser()">Intercambio</button>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#prestamoModal" (click)="setActiveGame(currentGame)">Prestamo</button>
+              </div>
+              <ng-template #propietario>
+                <div class="col">
+                  <b>Este juego es de tu propiedad</b>
+                </div>
+                </ng-template>
+          </div>
+          <div class="row">
+              <div class="col">
+                  <p>{{currentGame.description}}</p>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- Modal Intercambio -->
+  <div class="modal fade modal-lg" id="intercambioModal" tabindex="-1" aria-labelledby="intercambioModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="intercambioModalLabel">Selecciona tu juego para el intercambio </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body container-fluid text-center">
+          <div class="row" *ngIf="userGames != null; else espera">
+            <div class="col" *ngFor="let userGame of userGames">
+              <div class="card margin-auto m-3" style="width: 10rem; margin: auto;" (click)="cardSelected(userGame)">
+                <img src="{{userGame.image}}" class="card-img-top" alt="{{userGame.title}}">
+                <div class="card-body ">
+                  <h6 class="card-title">{{userGame.title}} - {{userGame.platform.name}}</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ng-template #espera>No tienes juegos</ng-template>
+        </div>
+        <p class="m-3"><b>Juego seleccionado: {{userGamesSelected.title}}</b></p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button *ngIf="botonConfirmarOwn" type="button" class="btn btn-primary" (click)="createExchange()" data-bs-target="#modalFinal" data-bs-toggle="modal">Guardar cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Prestamo -->
+  <div class="modal fade" id="prestamoModal" tabindex="-1" aria-labelledby="prestamoModalabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="prestamoModalLabel">Préstamo </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {{prestamoModalTxt}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button *ngIf="!botonConfirmar" type="button" class="btn btn-success" (click)="crearPeticionPrestamo()">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalFinal" tabindex="-1" aria-labelledby="modalFinalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalFinalLabel">Intercambio</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Hemos completado tu petición de intercambio, para producirse tiene que aceptar el propietario del juego.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

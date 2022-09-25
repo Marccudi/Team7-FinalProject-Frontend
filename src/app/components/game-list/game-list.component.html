@@ -1,0 +1,25 @@
+<app-header></app-header>
+<app-side-nav-bar></app-side-nav-bar>
+
+<div id="body" class="body">
+  <app-side-nav [developers]="gameDevelopers" [genres]="gameGenres" [platforms]="gamePlatforms"></app-side-nav>
+  <!-- ############################## Game List ############################## -->
+
+  <div id="gameList" class="game-list container-fluid text-center w-100" *ngIf="games != null; else espera">
+    <div class="row"> <!-- row-cols-sm-1 row-cols-lg-4 row-cols-md-2 -->
+      <div class="col" *ngFor="let game of games">
+        <a href routerLink="/juego/{{game.id}}" class="text-decoration-none">
+          <div class="card card-game" style="width: 20rem">
+            <img src={{game.image}} class="card-img-top img-fluid" alt="{{game.title}}" />
+            <div class="card-body">
+              <h5 class="card-title">{{game.title}}</h5>
+              <p class="card-text">{{game.platform.name}}</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <ng-template #espera>Esperando datos</ng-template>
+</div>
+<app-footer></app-footer>

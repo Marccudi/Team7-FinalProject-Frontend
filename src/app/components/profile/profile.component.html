@@ -1,0 +1,58 @@
+<app-header></app-header>
+<div class="container body">
+    <div class="row" >
+        <div class="col">
+            <h3>Mi perfil</h3>
+        </div>
+        <div class="col text-end">
+          <img class="img-fluid perfil" src="https://imgs.search.brave.com/-ujznuk6JG__TtAtxZHfJ00KrxUz0uncmtz9YiJyJVU/rs:fit:600:600:1/g:ce/aHR0cHM6Ly9zdDQu/ZGVwb3NpdHBob3Rv/cy5jb20vNDMyOTAw/OS8xOTk1Ni92LzQ1/MC9kZXBvc2l0cGhv/dG9zXzE5OTU2NTA3/Mi1zdG9jay1pbGx1/c3RyYXRpb24tY3Jl/YXRpdmUtdmVjdG9y/LWlsbHVzdHJhdGlv/bi1kZWZhdWx0LWF2/YXRhci5qcGc" alt="imagen-perfil">
+      </div>
+    </div>
+    <div class="row">
+        <div class="col row-input">
+            <label for="user">Usuario</label>
+            <input class="w-100 form-control" id="user" type="text" value={{user?.username}}
+    [(ngModel)]="user.username" required #username="ngModel">
+        </div>
+        <div class="col row-input">
+            <label for="email">Correo electrónico</label>
+            <input class="w-100 form-control-plaintext" id="email" type="email" value={{user?.email}} readonly>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col row-input">
+            <label for="password">Contraseña</label>
+            <input class="w-100 form-control" id="password" type="password" [(ngModel)]="form.password"
+    #password="ngModel">
+        </div>
+        <div class="col row-input">
+            <label for="repeat-password">Repetir contraseña</label>
+            <input class="w-100 form-control" id="repeat-password" type="password" [(ngModel)]="form.repeatPassword"
+    #repeatPassword="ngModel">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col row-input">
+            <label for="name">Nombre</label>
+            <input class="w-100 form-control" id="name" type="text" value={{user?.first_name}}
+    [(ngModel)]="user.first_name" required #firstName="ngModel">
+        </div>
+        <div class="col row-input">
+          <label for="name">Apellido</label>
+          <input class="w-100 form-control" id="surname" type="text" value={{user?.last_name}}
+    [(ngModel)]="user.last_name" required #lastName="ngModel">
+      </div>
+    </div>
+    <div class="row">
+        <div class="col row-input">
+            <button type="submit" class="btn btn-primary float-end btn-save" (click)="updateUser()">Guardar</button>
+        </div>
+        <div class="alert alert-success" *ngIf="updatedUser">
+            Valores actualizados correctamente.
+        </div>
+        <div class="alert alert-danger" *ngIf="errorPassword">
+            La contraseña introducida no coincide.
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

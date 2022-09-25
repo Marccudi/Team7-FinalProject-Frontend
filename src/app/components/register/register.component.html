@@ -1,0 +1,75 @@
+<div class="body container-fluid text-center d-flex flex-column justify-content-center align-items-center min-vh-100 ">
+    <div class="container container-register ">
+        <div class="row">
+            <div class="col-6" id="col-left">
+                <div class="row">
+                    <div class="col-12">
+                        <input type="text" class="w-100 form-control" placeholder="Usuario" [(ngModel)]="form.username" required #username="ngModel">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <input type="email" class="w-100 form-control" placeholder="Correo electrónico" [(ngModel)]="form.email" required #email="ngModel">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <input type="password" class="w-100 form-control" placeholder="Constraseña" [(ngModel)]="form.password" required #password="ngModel">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <input type="password" class="w-100 form-control" placeholder="Confirmar contraseña" [(ngModel)]="form.repeatPassword" required #repeatPassword="ngModel">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <input type="text" class="w-100 form-control" placeholder="Nombre" [(ngModel)]="form.firstName" required #firstName="ngModel">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <input type="text" class="w-100 form-control" placeholder="Apellido" [(ngModel)]="form.lastName" required #lastName="ngModel">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <input type="checkbox" id="terms-check">
+                        <label for="terms-check"><a href="/">Acepto los términos  y condiciones</a></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button class="btn btn-primary w-100" (click)="register()">Registrar</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <a href="/">Ya tengo una cuenta</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="alert alert-danger" *ngIf="inputError">{{message}}</div>
+                        <div class="alert alert-success" *ngIf="registered">{{message}}</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-6" id="col-right">
+                <div class="row">
+                    <div class="col-12">
+                        <img src="../../../assets/logo02-morado-min.png" alt="logo" class="img-fluid logo">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p> No hay nada mejor que intercambiar experiencias de un videojuego para fortalecer vínculos entre personas </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,23 @@
+.body{
+  transition: 0.5s;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+.card-game{
+  color: black;
+  margin: auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.card-game:hover{
+  color: black;
+}
+
+.game-row{
+  margin-top: 50px;
+}
+
+.card-img-top{
+  height: 400px !important;
+}
