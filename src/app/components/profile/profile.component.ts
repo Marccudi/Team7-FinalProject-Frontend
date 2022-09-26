@@ -41,7 +41,7 @@ export class ProfileComponent implements OnInit {
     this.updatedUser = false;
     this.errorPassword = false;
 
-    if (this.form.password !='' && this.form.repeatPassword !='') {
+    if (this.form.password !=null && this.form.repeatPassword !=null) {
       if (this.form.password === this.form.repeatPassword) {
         this.user.password = this.form.password;
         this.userService.update(this.id, this.user)
