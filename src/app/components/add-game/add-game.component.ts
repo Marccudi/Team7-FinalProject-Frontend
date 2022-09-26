@@ -139,8 +139,8 @@ export class AddGameComponent implements OnInit {
                 this.error = false;
               }, error => {
                 this.errortxt = 'Ha habido algún error';
-                this.error = true;
-                this.submitted = false;
+                //this.error = true;
+                this.submitted = true;
                 console.log(error);
               }
             );
