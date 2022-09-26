@@ -94,8 +94,10 @@ export class AddGameComponent implements OnInit {
               console.log(this.gameGenres);
               for (let index = 0; index < this.gameGenres.length; index++) {
                 const gameGenre = this.gameGenres[index];
-                this.selectedGenres.push(gameGenre);
+                if(!this.selectedGenres.includes(gameGenre)) {
+                  this.selectedGenres.push(gameGenre);
                 this.generosString += gameGenre.genre.name + ";";
+                }
               }
             }, error => {
               console.log(error);
